@@ -9,8 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.2.1",
+    "autoprefixer": "^10.4.20",
+    "cloudinary": "^2.5.1",
+    "next": "15.1.6",
+    "next-auth": "^4.24.11",
+    "postcss": "^8.5.1",
+    "prisma": "^6.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "stripe": "^17.6.0",
+    "tailwindcss": "^4.0.0"
   }
 }
