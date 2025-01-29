@@ -1,8 +1,7 @@
 {
-<<<<<<< HEAD
-  "name": "event-plarform",
+  "name": "event-platform",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,10 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.2.1",
     "@tailwindcss/vite": "^4.0.0",
+    "animate.css": "^4.1.1",
+    "axios": "^1.7.9",
+    "bulma": "^1.0.3",
+    "cloudinary": "^2.5.1",
     "framer-motion": "^12.0.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "^15.1.6",
+    "next-auth": "^4.24.11",
+    "prisma": "^6.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.4.0",
+    "stripe": "^17.6.0",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
@@ -28,30 +41,5 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "vite": "^6.0.5"
-=======
-  "name": "event-platform",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@headlessui/react": "^2.2.0",
-    "@heroicons/react": "^2.2.0",
-    "@prisma/client": "^6.2.1",
-    "animate.css": "^4.1.1",
-    "axios": "^1.7.9",
-    "bulma": "^1.0.3",
-    "cloudinary": "^2.5.1",
-    "next": "^15.1.6",
-    "next-auth": "^4.24.11",
-    "prisma": "^6.2.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "stripe": "^17.6.0"
->>>>>>> f6761629df05225aae6f4231882b91c5f5caaee9
   }
 }

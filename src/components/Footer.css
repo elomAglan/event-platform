@@ -1,0 +1,54 @@
+/* Footer CSS */
+.footer {
+  background-color: #2d2d2d; /* Fond sombre pour le footer */
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-start; /* Aligné à gauche */
+  gap: 20px; /* Espacement entre les icônes */
+  margin-bottom: 1.5rem; /* Ajoute un peu d'espace sous les icônes */
+}
+
+.social-icon {
+  color: #bbb;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: white; /* Changement de couleur au survol */
+}
+
+.social-icon.facebook:hover {
+  color: #3b5998; /* Facebook color */
+}
+
+.social-icon.twitter:hover {
+  color: #1da1f2; /* Twitter color */
+}
+
+.social-icon.instagram:hover {
+  color: #e1306c; /* Instagram color */
+}
+
+.social-icon.linkedin:hover {
+  color: #0077b5; /* LinkedIn color */
+}
+
+.footer-bottom {
+  background-color: #1a1a1a; /* Fond plus sombre pour la section du bas */
+  padding: 1.5rem;
+}
+
+.footer-bottom p {
+  color: #888; /* Texte gris pour la section du bas */
+  font-size: 0.875rem;
+}

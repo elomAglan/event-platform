@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+
 /* Appliquer une hauteur minimale à la page */
 body, html {
   margin: 0;
@@ -11,6 +13,7 @@ body, html {
   width: 100%;
   height: 70vh;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);/* Ombre sous la section hero */
 }
 
 /* ---- SLIDESHOW ---- */
@@ -61,11 +64,34 @@ body, html {
   z-index: 10;
 }
 
+/* Animation d'écriture */
 .hero-title {
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid white; /* Curseur clignotant */
+  width: 0; /* Démarre avec une largeur de 0 */
+  animation: typing 3s steps(20, end) forwards, blink 0.7s infinite;
+}
+
+/* Animation de l'effet d'écriture */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Animation du curseur clignotant */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
 .hero-subtitle {
@@ -88,7 +114,6 @@ body, html {
   gap: 15px; /* Espacement entre les boutons */
   z-index: 10;
 }
-
 
 .cta-button {
   display: inline-block;

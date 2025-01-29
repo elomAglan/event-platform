@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .navbar {
   position: fixed;
   width: 100%;
@@ -16,7 +22,15 @@
 
 .navbar.scrolled {
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
+}
+
+/* Icône à côté de "Sign In" */
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: middle;
+  color: white;
 }
 
 .logo {
@@ -27,21 +41,70 @@
 
 .nav-categories {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .nav-right {
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
   font-weight: 400;
-  transition: 0.3s;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .nav-link:hover {
   color: #FFD700;
+}
+
+/* ======== Ajout du style pour la recherche ======== */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Icône de recherche */
+.search-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.search-icon:hover {
+  color: #FFD700;
+  transform: scale(1.1);
+}
+
+/* Champ de recherche */
+.search-input {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 180px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: white;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+}
+
+/* Lorsque le champ de recherche est affiché */
+.search-input.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }

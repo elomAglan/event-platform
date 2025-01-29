@@ -1,0 +1,131 @@
+/* Page1.css */
+
+/* Ajout du padding en haut de la page */
+.page1-section {
+  padding-top: 4rem; /* Ajoute de l'espace en haut */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: #ffffff; /* Fond gris très clair */
+  margin-bottom: 4rem; /* Ajoute de l'espace en bas pour séparer le footer */
+}
+
+/* Style pour le titre des événements */
+.page1-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748; /* Gris foncé pour le titre */
+  margin-bottom: 5rem;
+}
+
+.page1-title span {
+  border-bottom: 4px solid #805ad5; /* Violet légèrement plus doux */
+}
+
+/* Style pour le sous-titre */
+.page1-subtitle {
+  font-size: 1.125rem;
+  color: #4a5568; /* Gris moyen pour le sous-titre */
+  margin-bottom: 2rem; /* Marge inférieure */
+}
+
+/* Container des événements avec espacement entre les éléments */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colonnes adaptatives */
+  gap: 2rem; /* Espacement plus large entre les cartes */
+  margin-top: 2rem; /* Espacement supérieur pour le container */
+  padding: 0 1rem; /* Padding latéral */
+}
+
+/* Style pour chaque carte d'événement */
+.event-card {
+  background-color: #f5f5f5e4; /* Fond blanc pour les cartes */
+  border-radius: 1.2rem; /* Coins arrondis légèrement plus prononcés */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombre légère mais visible */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Ajout de l'animation de l'ombre */
+  color: #2d3748; /* Texte gris foncé pour une meilleure lisibilité */
+}
+
+/* Style au survol de la carte */
+.event-card:hover {
+  transform: translateY(-5px); /* Déplacement léger vers le haut pour effet de survol */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Ombre plus marquée lors du survol */
+}
+
+/* Image de la carte */
+.event-card img {
+  width: 100%;
+  height: 200px; /* Hauteur ajustée */
+  object-fit: cover;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Effet sur l'image au survol */
+.event-card:hover img {
+  transform: scale(1.05); /* Légère zoom sur l'image au survol */
+}
+
+/* Contenu de la carte */
+.event-card-content {
+  padding: 1.5rem; /* Padding plus généreux pour l'intérieur */
+}
+
+/* Titre de l'événement */
+.event-card-title {
+  font-size: 1.5rem; /* Titre plus grand */
+  font-weight: 700; /* Font weight plus marqué */
+  color: #1a202c; /* Couleur plus sombre pour le titre */
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Détails de l'événement */
+.event-card-details {
+  color: #4a5568; /* Gris moyen pour les détails */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Bouton d'action */
+.event-button {
+  background-color: #3182ce; /* Bleu plus vif */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.6rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase; /* Texte en majuscules pour un effet plus dynamique */
+}
+
+/* Effet au survol du bouton */
+.event-button:hover {
+  background-color: #2b6cb0;
+  transform: translateY(-3px); /* Effet de survol avec translation */
+}
+
+/* Style du bouton "Voir tous les événements" */
+.see-more-button {
+  margin-top: 2rem;
+  background-color: #4a5568; /* Gris moyen pour le bouton */
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.see-more-button:hover {
+  background-color: #2d3748; /* Gris foncé pour l'effet de survol */
+}
+.section-spacing {
+  margin-top: 5rem;  /* Espace avant la section */
+  margin-bottom: 5rem; /* Espace après la section */
+}
+
