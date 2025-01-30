@@ -105,7 +105,8 @@ const Page1 = () => {
                 <h3 className="event-card-title">{event.title}</h3>
                 <p className="event-card-details">{event.date}</p>
                 <p className="event-card-details">{event.location}</p>
-                <button className="event-button">En savoir plus</button>
+                <p className="event-card-ticket">{event.Ticket}</p> {/* Affichage du prix du ticket */}
+                <button className="event-button">Acheter ticket</button>
               </div>
             </div>
           ))}
@@ -125,7 +126,8 @@ const Page1 = () => {
                 <h3 className="event-card-title">{concert.title}</h3>
                 <p className="event-card-details">{concert.date}</p>
                 <p className="event-card-details">{concert.location}</p>
-                <button className="event-button">En savoir plus</button>
+                <p className="event-card-ticket">{concert.Ticket}</p> {/* Affichage du prix du ticket */}
+                <button className="event-button">Acheter ticket</button>
               </div>
             </div>
           ))}
@@ -145,7 +147,8 @@ const Page1 = () => {
                 <h3 className="event-card-title">{sport.title}</h3>
                 <p className="event-card-details">{sport.date}</p>
                 <p className="event-card-details">{sport.location}</p>
-                <button className="event-button">En savoir plus</button>
+                <p className="event-card-ticket">{sport.Ticket}</p> {/* Affichage du prix du ticket */}
+                <button className="event-button">Acheter ticket</button>
               </div>
             </div>
           ))}

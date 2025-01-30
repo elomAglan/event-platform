@@ -89,6 +89,14 @@
   margin-bottom: 1.5rem;
 }
 
+.event-card-ticket {
+  font-weight: bold;
+  color: #098524;
+  margin-top: 5px;
+  margin-bottom: 5px; /* Optionnel : ajustez l'espacement sous le texte */
+}
+
+
 /* Bouton d'action */
 .event-button {
   background-color: #3182ce; /* Bleu plus vif */
