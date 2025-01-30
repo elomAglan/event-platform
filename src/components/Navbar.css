@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+/* Icône à côté de "Sign In" */
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: middle;
+  color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.nav-categories {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: #FFD700;
+}
+
+/* ======== Ajout du style pour la recherche ======== */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Icône de recherche */
+.search-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.search-icon:hover {
+  color: #FFD700;
+  transform: scale(1.1);
+}
+
+/* Champ de recherche */
+.search-input {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 180px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: white;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+}
+
+/* Lorsque le champ de recherche est affiché */
+.search-input.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+/* Style de l'overlay */
+.help-overlay {
+  background: rgba(0, 0, 0, 0.5); /* Transparence de fond */
+  position: fixed; /* Fixer l'overlay */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  z-index: 9999; /* Placer l'overlay au-dessus du contenu */
+}
+
+/* Style de la modal */
+.help-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du bouton de fermeture */
+button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Style du bouton X de fermeture */
+.close-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 36px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #ff5733; /* Un rouge orangé pour plus d'impact */
+}
+
+/* Style de la modal */
+.help-modal {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.help-modal p {
+  color: #666;
+  font-size: 16px;
+}
+
+.help-modal ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.help-modal ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+.help-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Formulaire de connexion */
+.sign-in-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.sign-up-link {
+  margin-top: 20px;
+}
+
+.sign-up-link a {
+  color: #007bff;
+}
+
+.sign-up-link a:hover {
+  text-decoration: underline;
+}
+
+.help-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Style de la modal (le conteneur) */
+.sign-in-modal {
+  background-color: white; /* Fond blanc pour la modal */
+  padding: 20px;
+  border-radius: 10px; /* Coins arrondis */
+  max-width: 400px; /* Largeur maximale de la modal */
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre portée autour de la modal */
+  z-index: 1100; /* Assurez-vous qu'il soit bien au-dessus de l'overlay */
+  position: relative; /* Pour l'alignement du bouton de fermeture */
+}
+
+.sign-up-modal {
+  background-color: white; /* Fond blanc pour la modal */
+  padding: 20px;
+  border-radius: 10px; /* Coins arrondis */
+  max-width: 400px; /* Largeur maximale de la modal */
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre portée autour de la modal */
+  z-index: 1100; /* Assurez-vous qu'il soit bien au-dessus de l'overlay */
+  position: relative; /* Pour l'alignement du bouton de fermeture */
+}
