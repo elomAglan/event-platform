@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaSearch } from "react-icons/fa";
 import Modal from "react-modal";
@@ -11,6 +12,15 @@ function Navbar() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isSignInOpen, setIsSignInOpen] = useState(false); // Etat pour la modal de connexion
   const [isSignUpOpen, setIsSignUpOpen] = useState(false); // Etat pour la modal de création de compte
+=======
+import { useState, useEffect, useRef } from "react";
+import { FaUser, FaSearch } from "react-icons/fa";
+import "./Navbar.css";
+
+function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+>>>>>>> origin/main
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -21,6 +31,10 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+<<<<<<< HEAD
+=======
+  // Gestion du clic en dehors de la recherche pour la masquer
+>>>>>>> origin/main
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -31,6 +45,7 @@ function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+<<<<<<< HEAD
   const openHelpModal = () => {
     setIsHelpOpen(true);
   };
@@ -64,10 +79,21 @@ function Navbar() {
         <a href="#events-section" className="nav-link">Événements</a>
         <a href="#concerts-section" className="nav-link">Concerts</a>
         <a href="#sports-section" className="nav-link">Sport</a>
+=======
+  return (
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+      <h1 className="logo">Eventify</h1>
+
+      <div className="nav-categories">
+        <a href="#" className="nav-link">Concerts</a>
+        <a href="#" className="nav-link">Conférences</a>
+        <a href="#" className="nav-link">Sport</a>
+>>>>>>> origin/main
         <a href="#" className="nav-link">Festivals</a>
         <a href="#" className="nav-link">Autres</a>
       </div>
 
+<<<<<<< HEAD
       <div className="nav-right" id="nav-right">
         <div className="nav-search-container" ref={searchRef}>
           <FaSearch className="search-icon" onClick={() => setShowSearch(true)} />
@@ -154,6 +180,30 @@ function Navbar() {
           <button type="submit" className="submit-btn">Créer un compte</button>
         </form>
       </Modal>
+=======
+      <div className="nav-right">
+        {/* Barre de recherche à côté de Sign In */}
+        <div className="nav-search-container" ref={searchRef}>
+          <FaSearch 
+            className="search-icon" 
+            onClick={() => setShowSearch(true)} 
+          />
+          {showSearch && (
+            <input 
+              type="text" 
+              className="search-input active" 
+              placeholder="Rechercher..." 
+              autoFocus
+            />
+          )}
+        </div>
+
+        <a href="#" className="nav-link">
+          <FaUser className="icon" /> Sign In
+        </a>
+        <a href="#" className="nav-link">Help</a>
+      </div>
+>>>>>>> origin/main
     </nav>
   );
 }

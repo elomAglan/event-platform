@@ -108,6 +108,7 @@
   transform: translateY(0);
   visibility: visible;
 }
+<<<<<<< HEAD
 
 /* Style de l'overlay */
 .help-overlay {
@@ -318,3 +319,5 @@ button:hover {
   z-index: 1100; /* Assurez-vous qu'il soit bien au-dessus de l'overlay */
   position: relative; /* Pour l'alignement du bouton de fermeture */
 }
+=======
+>>>>>>> origin/main

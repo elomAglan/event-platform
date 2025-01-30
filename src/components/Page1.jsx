@@ -90,7 +90,11 @@ const Page1 = () => {
     <section className="page1-section">
       <div className="container mx-auto text-center">
         {/* Section des événements */}
+<<<<<<< HEAD
         <h2 id="events-section" className="page1-title">
+=======
+        <h2 className="page1-title">
+>>>>>>> origin/main
           <span>Évé</span>nements à la Une 🎉
         </h2>
         <p className="page1-subtitle">
@@ -112,9 +116,15 @@ const Page1 = () => {
         </div>
 
         {/* Section des Concerts */}
+<<<<<<< HEAD
         <h2 id="concerts-section" className="page1-title section-spacing">
           <span>Con</span>certs à venir 🎶
         </h2>
+=======
+        <h2 className="page1-title section-spacing">
+  <span>Con</span>certs à venir 🎶
+</h2>
+>>>>>>> origin/main
         <p className="page1-subtitle">Les meilleurs concerts dans votre ville !</p>
 
         <div className="event-grid">
@@ -132,9 +142,15 @@ const Page1 = () => {
         </div>
 
         {/* Section des Sports */}
+<<<<<<< HEAD
         <h2 id="sports-section" className="page1-title section-spacing">
           <span>Évé</span>nements Sportifs ⚽🏀🏃
         </h2>
+=======
+        <h2 className="page1-title section-spacing">
+  <span>Évé</span>nements Sportifs ⚽🏀🏃
+</h2>
+>>>>>>> origin/main
         <p className="page1-subtitle">Ne manquez pas les compétitions et matchs à venir !</p>
 
         <div className="event-grid">
@@ -150,6 +166,10 @@ const Page1 = () => {
             </div>
           ))}
         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
       </div>
     </section>
   );
