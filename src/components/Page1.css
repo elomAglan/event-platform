@@ -1,139 +1,98 @@
 /* Page1.css */
-
-/* Ajout du padding en haut de la page */
 .page1-section {
-  padding-top: 4rem; /* Ajoute de l'espace en haut */
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  background-color: #ffffff; /* Fond gris très clair */
-  margin-bottom: 4rem; /* Ajoute de l'espace en bas pour séparer le footer */
+  padding: 40px 20px;
+  background-color: #f9f9f9;
 }
 
-/* Style pour le titre des événements */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .page1-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  color: #2d3748; /* Gris foncé pour le titre */
-  margin-bottom: 5rem;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .page1-title span {
-  border-bottom: 4px solid #805ad5; /* Violet légèrement plus doux */
+  color: #007bff;
 }
 
-/* Style pour le sous-titre */
 .page1-subtitle {
-  font-size: 1.125rem;
-  color: #4a5568; /* Gris moyen pour le sous-titre */
-  margin-bottom: 2rem; /* Marge inférieure */
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 40px;
 }
 
-/* Container des événements avec espacement entre les éléments */
 .event-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Colonnes adaptatives */
-  gap: 2rem; /* Espacement plus large entre les cartes */
-  margin-top: 2rem; /* Espacement supérieur pour le container */
-  padding: 0 1rem; /* Padding latéral */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
 }
 
-/* Style pour chaque carte d'événement */
 .event-card {
-  background-color: #f5f5f5e4; /* Fond blanc pour les cartes */
-  border-radius: 1.2rem; /* Coins arrondis légèrement plus prononcés */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombre légère mais visible */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Ajout de l'animation de l'ombre */
-  color: #2d3748; /* Texte gris foncé pour une meilleure lisibilité */
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Style au survol de la carte */
 .event-card:hover {
-  transform: translateY(-5px); /* Déplacement léger vers le haut pour effet de survol */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Ombre plus marquée lors du survol */
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Image de la carte */
-.event-card img {
+.event-image {
   width: 100%;
-  height: 200px; /* Hauteur ajustée */
+  height: 200px;
   object-fit: cover;
-  border-top-left-radius: 1.2rem;
-  border-top-right-radius: 1.2rem;
-  transition: transform 0.3s ease-in-out;
 }
 
-/* Effet sur l'image au survol */
-.event-card:hover img {
-  transform: scale(1.05); /* Légère zoom sur l'image au survol */
-}
-
-/* Contenu de la carte */
 .event-card-content {
-  padding: 1.5rem; /* Padding plus généreux pour l'intérieur */
+  padding: 20px;
+  text-align: left;
 }
 
-/* Titre de l'événement */
 .event-card-title {
-  font-size: 1.5rem; /* Titre plus grand */
-  font-weight: 700; /* Font weight plus marqué */
-  color: #1a202c; /* Couleur plus sombre pour le titre */
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-/* Détails de l'événement */
 .event-card-details {
-  color: #4a5568; /* Gris moyen pour les détails */
   font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  color: #666;
+  margin-bottom: 8px;
 }
 
 .event-card-ticket {
+  font-size: 1rem;
+  color: #007bff;
   font-weight: bold;
-  color: #098524;
-  margin-top: 5px;
-  margin-bottom: 5px; /* Optionnel : ajustez l'espacement sous le texte */
+  margin-bottom: 16px;
 }
 
-
-/* Bouton d'action */
 .event-button {
-  background-color: #3182ce; /* Bleu plus vif */
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.6rem;
-  text-align: center;
-  display: block;
   width: 100%;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-transform: uppercase; /* Texte en majuscules pour un effet plus dynamique */
-}
-
-/* Effet au survol du bouton */
-.event-button:hover {
-  background-color: #2b6cb0;
-  transform: translateY(-3px); /* Effet de survol avec translation */
-}
-
-/* Style du bouton "Voir tous les événements" */
-.see-more-button {
-  margin-top: 2rem;
-  background-color: #4a5568; /* Gris moyen pour le bouton */
-  color: white;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  display: inline-block;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.see-more-button:hover {
-  background-color: #2d3748; /* Gris foncé pour l'effet de survol */
-}
-.section-spacing {
-  margin-top: 5rem;  /* Espace avant la section */
-  margin-bottom: 5rem; /* Espace après la section */
+.event-button:hover {
+  background-color: #0056b3;
 }
 
+.section-spacing {
+  margin-top: 60px;
+}

@@ -1,42 +1,89 @@
-// App.js
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar"; // Navbar globale
 import Page1 from "./components/Page1";
-import Footer from "./components/Footer";  // Importer le Footer
+import Footer from "./components/Footer";
+import Login from "./Authentification/Login";
+import Register from "./Authentification/Register"; // Import de la page Register
 
 function App() {
+  const location = useLocation(); // Récupère la route courante
+
+  const handleJoinEvent = () => {
+    const eventsSection = document.getElementById("events-section");
+    if (eventsSection) {
+      eventsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Vérifie si la route courante est "login" ou "register"
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Barre de navigation */}
-      <Navbar />
+      {/* Masque la Navbar sur les pages Login et Register */}
+      {!isAuthPage && <Navbar />}
 
-      {/* Hero Section */}
-      <header className="hero relative">
-        <div className="hero-overlay">
-          <h1 className="hero-title animate-typing">
-            Bienvenue sur <span className="highlight">Eventify</span>
-          </h1>
-          <p className="hero-subtitle">
-            Organisez vos événements ou participez à des expériences mémorables.
-          </p>
-        </div>
+      {/* Routes de l'application */}
+      <main className="flex-grow">
+        <Routes>
+          {/* Route principale (accueil) */}
+          <Route 
+            path="/" 
+            element={
+              <>
+                {/* Hero Section */}
+                <header className="hero relative">
+                  <div className="hero-overlay">
+                    <h1 className="hero-title animate-typing">
+                      Bienvenue sur <span className="highlight">Eventify</span>
+                    </h1>
+                    <p className="hero-subtitle">
+                      Organisez vos événements ou participez à des expériences mémorables.
+                    </p>
+                  </div>
 
-        {/* Call to Action Section */}
-        <div className="cta-section">
-          <button className="cta-button create">Créer un événement</button>
-          <button className="cta-button join">Participer à un événement</button>
-        </div>
-      </header>
+                  {/* Call to Action Section */}
+                  <div className="cta-section">
+                    <button className="cta-button create" aria-label="Créer un événement">
+                      Créer un événement
+                    </button>
+                    <button className="cta-button join" onClick={handleJoinEvent} aria-label="Participer à un événement">
+                      Participer à un événement
+                    </button>
+                  </div>
+                </header>
 
-      {/* Contenu principal avec un espacement généreux avant Page1 */}
-      <main className="flex-grow mt-20 md:mt-40 py-16"> {/* Ajuste la marge ici */}
-        <Page1 />
+                {/* Contenu principal */}
+                <section className="mt-20 md:mt-40 py-16">
+                  <Page1 />
+                </section>
+
+               
+              </>
+            }
+          />
+
+          {/* Route pour la page de connexion */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Route pour la page d'inscription */}
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </main>
 
-      {/* Footer Section */}
-      <Footer /> {/* Ajout du Footer */}
+      {/* Masque le Footer sur les pages Login et Register */}
+      {!isAuthPage && <Footer />}
     </div>
   );
 }
 
-export default App;
+function Root() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default Root;
