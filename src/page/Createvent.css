@@ -78,3 +78,42 @@ button:hover {
   flex: 1;
   margin: 0 10px;
 }
+
+/* Barre de progression */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 20px auto;
+  position: relative;
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: #ccc;
+  z-index: -1;
+  transform: translateY(-50%);
+}
+
+.progress-step {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.progress-step.active {
+  background-color: #007bff;
+}

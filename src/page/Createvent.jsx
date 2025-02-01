@@ -131,6 +131,14 @@ const CreateEvent = () => {
   return (
     <div className="create-event-container">
       <h1>Créer un nouvel événement</h1>
+
+      {/* Barre de progression */}
+      <div className="progress-bar">
+        <div className={`progress-step ${step >= 1 ? "active" : ""}`}>1</div>
+        <div className={`progress-step ${step >= 2 ? "active" : ""}`}>2</div>
+        <div className={`progress-step ${step >= 3 ? "active" : ""}`}>3</div>
+      </div>
+
       <form onSubmit={handleSubmit}>
         {renderStep()}
       </form>
