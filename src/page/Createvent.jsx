@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+
 
 // Barre de navigation stylisée avec Styled Components
 const Navbar = styled.nav`
@@ -129,7 +131,9 @@ const CreateEvent = () => {
     <div>
       {/* Barre de navigation */}
       <Navbar>
-        <NavbarTitle>Eventify</NavbarTitle>
+        <Link to="/">
+              <h1 className="logo">Eventify</h1> {/* Remplacez par votre logo */}
+                  </Link>
       </Navbar>
 
       {/* Contenu centré */}

@@ -21,6 +21,57 @@
   transition: background 0.3s ease-in-out;
   z-index: 1000;
 }
+.create-event-btn {
+  background-color: #8168ce;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+.create-event-btn:hover {
+  background-color: #218838;
+}
+
+.create-event-btn {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: none;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Espacement entre l'icône et le texte */
+  transition: background-color 0.3s ease;
+}
+
+.create-event-btn:hover {
+  background-color: #0459b3;
+}
+
+.plus-circle {
+  width: 25px; /* Taille du rond */
+  height: 25px; /* Taille du rond */
+  background-color: white;
+  color: #28a745; /* Couleur de l'icône + */
+  border-radius: 50%; /* Rendre l'élément circulaire */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem; /* Taille de l'icône */
+}
+
+.plus-icon {
+  font-size: 0.75rem; /* Taille de l'icône à l'intérieur du cercle */
+}
+
 
 .navbar.scrolled {
   background: rgba(0, 0, 0, 0.8);
@@ -251,4 +302,120 @@
 
 .sign-up-link a:hover {
   text-decoration: underline;
+}  
+
+/* Menu hamburger */
+.hamburger-menu {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Catégories de navigation */
+.nav-categories {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-categories.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .nav-categories {
+    display: none;
+  }
+
+  .nav-categories.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .nav-right {
+    display: none; /* Masquer la section droite en mode mobile */
+  }
+
+  .nav-search-desktop,
+  .create-event-desktop,
+  .sign-in-desktop {
+    display: none; /* Masquer les éléments dans la section droite en mode mobile */
+  }
+
+  .nav-search-mobile,
+  .create-event-mobile,
+  .sign-in-mobile {
+    display: block; /* Afficher les éléments dans le menu déroulant en mode mobile */
+  }
+}
+
+/* Styles pour les boutons dans le menu déroulant */
+.nav-search-mobile {
+  margin-top: 10px;
+}
+
+.nav-search-mobile .search-icon {
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-search-mobile .search-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.create-event-mobile .create-event-btn,
+.sign-in-mobile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.create-event-mobile .create-event-btn:hover,
+.sign-in-mobile:hover {
+  color: #007bff;
+}
+
+.create-event-mobile .plus-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.create-event-mobile .plus-icon {
+  color: #007bff;
+  font-size: 1rem;
 }
