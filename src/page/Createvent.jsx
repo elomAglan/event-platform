@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 // Barre de navigation stylisée avec Styled Components
 const Navbar = styled.nav`
@@ -18,7 +17,7 @@ const Navbar = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1000; /* Assurez-vous qu'elle reste au-dessus du contenu */
+  z-index: 1000;
 `;
 
 const NavbarTitle = styled.div`
@@ -84,16 +83,23 @@ const Button = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  background-color: ${(props) => (props.primary ? "#007bff" : props.secondary ? "#6c757d" : "#28a745")};
+  background-color: ${(props) => (props.primary ? "#007bff" : "#28a745")};
   color: white;
   border: none;
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
+  margin-right: 1rem;
 
   &:hover {
-    background-color: ${(props) => (props.primary ? "#0056b3" : props.secondary ? "#5a6268" : "#218838")};
+    background-color: ${(props) => (props.primary ? "#0056b3" : "#218838")};
   }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 `;
 
 const CreateEvent = () => {
@@ -101,14 +107,32 @@ const CreateEvent = () => {
   const [eventData, setEventData] = useState({
     title: "",
     description: "",
-    date: "",
-    location: "",
-    ticketPrice: "",
-    phone: "",
-    cardNumber: "",
-    email: "",
+    category: "",
+    tags: "",
+    organizer: "",
+    locationName: "",
+    locationAddress: "",
+    onlineLink: "",
+    language: "",
+    startDate: "",
+    endDate: "",
+    estimatedDuration: "",
+    arrivalTime: "",
+    ticketType: "",
+    maxCapacity: "",
+    registrationDeadline: "",
+    promoCode: "",
+    program: "",
+    speakers: "",
+    sponsors: "",
+    partners: "",
+    materials: "",
+    prerequisites: "",
+    accessibility: "",
     image: null,
   });
+
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -124,7 +148,7 @@ const CreateEvent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Événement créé :", eventData);
-    alert("Événement créé avec succès !");
+    setShowConfirmation(true);
   };
 
   return (
@@ -132,8 +156,8 @@ const CreateEvent = () => {
       {/* Barre de navigation */}
       <Navbar>
         <Link to="/">
-              <h1 className="logo">Eventify</h1> {/* Remplacez par votre logo */}
-                  </Link>
+          <h1 className="logo">Eventify</h1> {/* Remplacez par votre logo */}
+        </Link>
       </Navbar>
 
       {/* Contenu centré */}
@@ -143,7 +167,7 @@ const CreateEvent = () => {
         {/* Barre de progression animée */}
         <ProgressBarContainer>
           <ProgressBar>
-            <Progress style={{ width: `${(step - 1) * 50}%` }} />
+          <Progress style={{ width: `${(step - 1) * 20}%` }} />
           </ProgressBar>
         </ProgressBarContainer>
 
@@ -156,7 +180,7 @@ const CreateEvent = () => {
           >
             {step === 1 && (
               <div>
-                <StepTitle>Étape 1 : Informations de base</StepTitle>
+                <StepTitle>Étape 1 : Informations générales</StepTitle>
                 <Input
                   type="text"
                   name="title"
@@ -172,76 +196,214 @@ const CreateEvent = () => {
                   onChange={handleChange}
                   required
                 />
-                <Button type="button" onClick={nextStep} primary>
-                  Suivant
-                </Button>
+                <Input
+                  type="text"
+                  name="category"
+                  placeholder="Catégorie (ex. : conférence, atelier)"
+                  value={eventData.category}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="text"
+                  name="tags"
+                  placeholder="Tags (séparés par des virgules)"
+                  value={eventData.tags}
+                  onChange={handleChange}
+                />
+                <Input
+                  type="text"
+                  name="organizer"
+                  placeholder="Organisateur"
+                  value={eventData.organizer}
+                  onChange={handleChange}
+                  required
+                />
+                <ButtonContainer>
+                  <Button type="button" onClick={nextStep} primary>
+                    Suivant
+                  </Button>
+                </ButtonContainer>
               </div>
             )}
 
             {step === 2 && (
               <div>
-                <StepTitle>Étape 2 : Détails supplémentaires</StepTitle>
+                <StepTitle>Étape 2 : Lieu et informations temporelles</StepTitle>
                 <Input
-                  type="date"
-                  name="date"
-                  value={eventData.date}
+                  type="text"
+                  name="locationName"
+                  placeholder="Nom du lieu"
+                  value={eventData.locationName}
                   onChange={handleChange}
                   required
                 />
                 <Input
                   type="text"
-                  name="location"
-                  placeholder="Lieu de l'événement"
-                  value={eventData.location}
+                  name="locationAddress"
+                  placeholder="Adresse"
+                  value={eventData.locationAddress}
                   onChange={handleChange}
                   required
                 />
                 <Input
-                  type="tel"
-                  name="phone"
-                  placeholder="Numéro de téléphone"
-                  value={eventData.phone}
+                  type="url"
+                  name="onlineLink"
+                  placeholder="Lien pour événement en ligne"
+                  value={eventData.onlineLink}
+                  onChange={handleChange}
+                />
+                <Input
+                  type="text"
+                  name="language"
+                  placeholder="Langue principale"
+                  value={eventData.language}
                   onChange={handleChange}
                   required
                 />
                 <Input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={eventData.email}
+                  type="datetime-local"
+                  name="startDate"
+                  value={eventData.startDate}
                   onChange={handleChange}
                   required
                 />
-                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
-                  <Button type="button" onClick={prevStep} secondary>
+                <Input
+                  type="datetime-local"
+                  name="endDate"
+                  value={eventData.endDate}
+                  onChange={handleChange}
+                  required
+                />
+                <ButtonContainer>
+                  <Button type="button" onClick={prevStep}>
                     Précédent
                   </Button>
                   <Button type="button" onClick={nextStep} primary>
                     Suivant
                   </Button>
-                </div>
+                </ButtonContainer>
               </div>
             )}
 
             {step === 3 && (
               <div>
-                <StepTitle>Étape 3 : Paiement et image</StepTitle>
+                <StepTitle>Étape 3 : Informations d'inscription</StepTitle>
+                <Input
+                  type="text"
+                  name="ticketType"
+                  placeholder="Type de billet (gratuit ou payant)"
+                  value={eventData.ticketType}
+                  onChange={handleChange}
+                  required
+                />
                 <Input
                   type="number"
-                  name="ticketPrice"
-                  placeholder="Prix du billet (FCFA)"
-                  value={eventData.ticketPrice}
+                  name="maxCapacity"
+                  placeholder="Capacité maximale"
+                  value={eventData.maxCapacity}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="date"
+                  name="registrationDeadline"
+                  value={eventData.registrationDeadline}
                   onChange={handleChange}
                   required
                 />
                 <Input
                   type="text"
-                  name="cardNumber"
-                  placeholder="Numéro de carte bancaire"
-                  value={eventData.cardNumber}
+                  name="promoCode"
+                  placeholder="Code promo (facultatif)"
+                  value={eventData.promoCode}
+                  onChange={handleChange}
+                />
+                <ButtonContainer>
+                  <Button type="button" onClick={prevStep}>
+                    Précédent
+                  </Button>
+                  <Button type="button" onClick={nextStep} primary>
+                    Suivant
+                  </Button>
+                </ButtonContainer>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div>
+                <StepTitle>Étape 4 : Détails supplémentaires</StepTitle>
+                <Textarea
+                  name="program"
+                  placeholder="Programme de l'événement"
+                  value={eventData.program}
                   onChange={handleChange}
                   required
                 />
+                <Textarea
+                  name="speakers"
+                  placeholder="Intervenants et leurs rôles"
+                  value={eventData.speakers}
+                  onChange={handleChange}
+                />
+                <Textarea
+                  name="sponsors"
+                  placeholder="Sponsors"
+                  value={eventData.sponsors}
+                  onChange={handleChange}
+                />
+                <Textarea
+                  name="partners"
+                  placeholder="Partenaires"
+                  value={eventData.partners}
+                  onChange={handleChange}
+                />
+                <ButtonContainer>
+                  <Button type="button" onClick={prevStep}>
+                    Précédent
+                  </Button>
+                  <Button type="button" onClick={nextStep} primary>
+                    Suivant
+                  </Button>
+                </ButtonContainer>
+              </div>
+            )}
+
+            {step === 5 && (
+              <div>
+                <StepTitle>Étape 5 : Matériel et accessibilité</StepTitle>
+                <Textarea
+                  name="materials"
+                  placeholder="Matériel nécessaire pour les participants"
+                  value={eventData.materials}
+                  onChange={handleChange}
+                />
+                <Textarea
+                  name="prerequisites"
+                  placeholder="Pré-requis pour les participants"
+                  value={eventData.prerequisites}
+                  onChange={handleChange}
+                />
+                <Textarea
+                  name="accessibility"
+                  placeholder="Accessibilité du lieu"
+                  value={eventData.accessibility}
+                  onChange={handleChange}
+                />
+                <ButtonContainer>
+                  <Button type="button" onClick={prevStep}>
+                    Précédent
+                  </Button>
+                  <Button type="button" onClick={nextStep} primary>
+                    Suivant
+                  </Button>
+                </ButtonContainer>
+              </div>
+            )}
+
+            {step === 6 && (
+              <div>
+                <StepTitle>Étape 6 : Médias et promotion</StepTitle>
                 <Input
                   type="file"
                   name="image"
@@ -249,19 +411,75 @@ const CreateEvent = () => {
                   onChange={handleChange}
                   required
                 />
-                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
-                  <Button type="button" onClick={prevStep} secondary>
+                <ButtonContainer>
+                  <Button type="button" onClick={prevStep}>
                     Précédent
                   </Button>
                   <Button type="submit">Créer l'événement</Button>
-                </div>
+                </ButtonContainer>
               </div>
             )}
           </motion.div>
         </form>
+
+     {/* Confirmation après soumission */}
+     {showConfirmation && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: -50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: -50 }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "#6c5ce7", // Couleur violette moderne
+              color: "white",
+              padding: "2.5rem",
+              borderRadius: "1rem",
+              textAlign: "center",
+              zIndex: 1001,
+              boxShadow: "0 4px 20px rgba(108, 92, 231, 0.3)",
+              border: "2px solid rgba(255, 255, 255, 0.1)",
+            }}
+          >
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              style={{ fontSize: "1.75rem", marginBottom: "1.5rem" }}
+            >
+              Événement créé avec succès ! 🎉
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <Button
+                onClick={() => setShowConfirmation(false)}
+                style={{
+                  marginTop: "1rem",
+                  backgroundColor: "#ffffff",
+                  color: "#6c5ce7",
+                  fontWeight: "bold",
+                  border: "none",
+                  padding: "0.75rem 1.5rem",
+                  borderRadius: "0.5rem",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                Fermer
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
       </Container>
     </div>
   );
 };
+
 
 export default CreateEvent;

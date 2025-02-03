@@ -1,7 +1,21 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa"; // Importer l'icône de retour
-import "./Login.css"; // Fichier CSS pour le style
+import { FaArrowLeft } from "react-icons/fa";
+import "./Login.css"; // Ensure the CSS file is imported
+
+
+// Fake login API simulation (can be moved to a separate utility file)
+const fakeLoginApi = (email, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (email === "test@example.com" && password === "password123") {
+        resolve({ user: "Test User" });
+      } else {
+        reject(new Error("Email ou mot de passe incorrect."));
+      }
+    }, 1000);
+  });
+};
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,7 +28,7 @@ function Login() {
     e.preventDefault();
     setError("");
 
-    // Validation simple
+    // Validate inputs
     if (!email || !password) {
       setError("Veuillez entrer votre email et mot de passe.");
       return;
@@ -23,130 +37,93 @@ function Login() {
     setIsLoading(true);
 
     try {
-      // Simuler une requête API (remplacez par votre logique réelle)
       const response = await fakeLoginApi(email, password);
       console.log("Connexion réussie :", response);
-      navigate("/"); // Rediriger vers la page d'accueil après la connexion
+      navigate("/"); // Redirect to home page after successful login
     } catch (err) {
-      setError("Email ou mot de passe incorrect.");
+      setError(err.message || "Une erreur s'est produite. Veuillez réessayer.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Fonction simulée pour l'API de connexion
-  const fakeLoginApi = (email, password) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (email === "test@example.com" && password === "password123") {
-          resolve({ user: "Test User" });
-        } else {
-          reject(new Error("Email ou mot de passe incorrect."));
-        }
-      }, 1000); // Simuler un délai de réseau
-    });
-  };
-
   return (
-    <div className="login-page">
-      {/* Header */}
-      <header className="login-header">
-        <div className="logo">
-          <Link to="/">
-            <img src="/logo.png" alt="Logo" /> {/* Remplacez par votre logo */}
-          </Link>
-        </div>
-      </header>
+    <div className="login-container">
+      {/* Left Side: Login Form */}
+      <div className="login-form">
+        <button
+          className="back-button"
+          onClick={() => navigate(-1)}
+          aria-label="Retour"
+        >
+          <FaArrowLeft />
+        </button>
 
-      {/* Formulaire de connexion */}
-      <div className="login-container">
-        <div className="login-form">
-          {/* Bouton de retour */}
-          <button
-            className="back-button"
-            onClick={() => navigate(-1)}
-            aria-label="Retour"
-          >
-            <FaArrowLeft />
-          </button>
+        <h2 className="login-title">Se connecter</h2>
+        {error && <p className="error-message">{error}</p>}
 
-          <h2 className="login-title">Se connecter</h2>
-
-          {/* Affichage des erreurs */}
-          {error && <p className="error-message">{error}</p>}
-
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="email" className="input-label">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="input-field"
-                placeholder="Entrez votre email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                aria-required="true"
-              />
-            </div>
-
-            <div className="input-group">
-              <label htmlFor="password" className="input-label">
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="input-field"
-                placeholder="Entrez votre mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                aria-required="true"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="submit-btn"
-              disabled={isLoading}
-              aria-label={isLoading ? "Connexion en cours..." : "Se connecter"}
-            >
-              {isLoading ? "Connexion en cours..." : "Se connecter"}
-            </button>
-          </form>
-
-          {/* Options supplémentaires */}
-          <div className="login-options">
-            <Link to="/forgot-password" className="forgot-password-link">
-              Mot de passe oublié ?
-            </Link>
-            <p className="signup-link">
-              Pas encore de compte ?{" "}
-              <Link to="/register" className="signup-link-text">
-                Créer un compte
-              </Link>
-            </p>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Entrez votre email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              aria-required="true"
+            />
           </div>
+
+          <div className="input-group">
+            <label htmlFor="password">Mot de passe</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Entrez votre mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={isLoading}
+            aria-label={isLoading ? "Connexion en cours" : "Se connecter"}
+          >
+            {isLoading ? (
+              <span className="loading-spinner"></span>
+            ) : (
+              "Se connecter"
+            )}
+          </button>
+        </form>
+
+        <div className="login-options">
+          <Link to="/forgot-password" className="forgot-password-link">
+            Mot de passe oublié ?
+          </Link>
+          <p>
+            Pas encore de compte ?{" "}
+            <Link to="/register" className="signup-link">
+              Créer un compte
+            </Link>
+          </p>
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="login-footer">
-        <p>
-          En vous connectant, vous acceptez nos{" "}
-          <Link to="/terms" className="footer-link">
-            Conditions d'utilisation
-          </Link>{" "}
-          et notre{" "}
-          <Link to="/privacy" className="footer-link">
-            Politique de confidentialité
-          </Link>
-          .
-        </p>
-      </footer>
+      {/* Right Side: Image */}
+      <div className="login-image">
+        <img
+          src={"/image3.jpg"}
+          alt="Connexion"
+          aria-hidden="true"
+        />
+      </div>
     </div>
   );
 }

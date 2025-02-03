@@ -13,7 +13,7 @@
 
 .social-icons {
   display: flex;
-  justify-content: flex-start; /* Aligné à gauche */
+  justify-content: center; /* Centrer les icônes au lieu de les aligner à gauche */
   gap: 20px; /* Espacement entre les icônes */
   margin-bottom: 1.5rem; /* Ajoute un peu d'espace sous les icônes */
 }
@@ -51,4 +51,43 @@
 .footer-bottom p {
   color: #888; /* Texte gris pour la section du bas */
   font-size: 0.875rem;
+}
+
+/* ---- RESPONSIVE DESIGN ---- */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 1rem; /* Réduit l'espacement vertical sur les tablettes */
+  }
+
+  .footer-content {
+    padding: 0 20px; /* Ajoute un peu d'espace sur les côtés */
+  }
+
+  .social-icons {
+    justify-content: center; /* Toujours centré sur tablette */
+    gap: 15px; /* Réduit l'espacement entre les icônes */
+  }
+
+  .footer-bottom {
+    padding: 1rem; /* Réduit l'espacement de la section du bas */
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem; /* Taille de police plus petite sur mobile/tablette */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem 1rem; /* Réduit l'espacement vertical sur les petits écrans */
+  }
+
+  .social-icons {
+    flex-direction: column; /* Empile les icônes verticalement sur les petits écrans */
+    gap: 10px; /* Réduit encore l'espacement */
+  }
+
+  .footer-bottom p {
+    font-size: 0.7rem; /* Taille de police encore plus petite */
+  }
 }
