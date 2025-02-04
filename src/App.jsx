@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar"; // Navbar globale
+import Navbar from "./components/Navbar";
 import Page1 from "./components/Page1";
 import Footer from "./components/Footer";
 import Login from "./Authentification/Login";
-import Register from "./Authentification/Register"; // Import de la page Register
-import Createvent from "./page/Createvent"; // Import du composant Createvent
+import Register from "./Authentification/Register";
+import Createvent from "./page/Createvent";
+import Payeticket from "./page/Payeticket"; // Import de la page Payeticket
 
 function App() {
-  const location = useLocation(); // Récupère la route courante
-  const navigate = useNavigate(); // Hook pour la navigation
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleJoinEvent = () => {
     const eventsSection = document.getElementById("events-section");
@@ -18,28 +19,22 @@ function App() {
     }
   };
 
-  // Fonction pour rediriger vers la page de création d'événement
   const handleCreateEvent = () => {
     navigate("/createvent");
   };
 
-  // Vérifie si la route courante est "login", "register" ou "createvent"
   const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/createvent";
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Masque la Navbar sur les pages Login, Register et Createvent */}
       {!isAuthPage && <Navbar />}
 
-      {/* Routes de l'application */}
       <main className="flex-grow">
         <Routes>
-          {/* Route principale (accueil) */}
           <Route 
             path="/" 
             element={
               <>
-                {/* Hero Section */}
                 <header className="hero relative">
                   <div className="hero-overlay">
                     <h1 className="hero-title animate-typing">
@@ -49,13 +44,11 @@ function App() {
                       Organisez vos événements ou participez à des expériences mémorables.
                     </p>
                   </div>
-
-                  {/* Call to Action Section */}
                   <div className="cta-section">
                     <button
                       className="cta-button create"
                       aria-label="Créer un événement"
-                      onClick={handleCreateEvent} // Lien vers la page Createvent
+                      onClick={handleCreateEvent}
                     >
                       Créer un événement
                     </button>
@@ -68,8 +61,6 @@ function App() {
                     </button>
                   </div>
                 </header>
-
-                {/* Contenu principal */}
                 <section className="mt-20 md:mt-40 py-16">
                   <Page1 />
                 </section>
@@ -77,18 +68,15 @@ function App() {
             }
           />
 
-          {/* Route pour la page de connexion */}
           <Route path="/login" element={<Login />} />
-
-          {/* Route pour la page d'inscription */}
           <Route path="/register" element={<Register />} />
-
-          {/* Route pour la page de création d'événement */}
           <Route path="/createvent" element={<Createvent />} />
+
+          {/* Nouvelle route pour la page de paiement */}
+          <Route path="/payeticket" element={<Payeticket />} />
         </Routes>
       </main>
 
-      {/* Masque le Footer sur les pages Login, Register et Createvent */}
       {!isAuthPage && <Footer />}
     </div>
   );

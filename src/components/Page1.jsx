@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Page1.css"; // Importation du fichier CSS
 
 // Données des événements
@@ -23,6 +24,13 @@ const sports = [
 ];
 
 const Page1 = () => {
+  const navigate = useNavigate();
+
+  // Fonction pour rediriger vers la page Payeticket en passant l'événement dans l'URL
+  const handleBuyTicket = (eventData) => {
+    navigate(`/payeticket?event=${encodeURIComponent(JSON.stringify(eventData))}`);
+  };
+
   return (
     <section className="page1-section">
       <div className="container mx-auto text-center">
@@ -43,7 +51,10 @@ const Page1 = () => {
                 <p className="event-card-details text-sm text-gray-600">{event.date}</p>
                 <p className="event-card-details text-sm text-gray-600">{event.location}</p>
                 <p className="event-card-ticket text-sm text-blue-600 font-semibold">{event.Ticket}</p>
-                <button className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full">
+                <button
+                  className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full"
+                  onClick={() => handleBuyTicket(event)}
+                >
                   Acheter ticket
                 </button>
               </div>
@@ -66,7 +77,10 @@ const Page1 = () => {
                 <p className="event-card-details text-sm text-gray-600">{concert.date}</p>
                 <p className="event-card-details text-sm text-gray-600">{concert.location}</p>
                 <p className="event-card-ticket text-sm text-blue-600 font-semibold">{concert.Ticket}</p>
-                <button className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full">
+                <button
+                  className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full"
+                  onClick={() => handleBuyTicket(concert)}
+                >
                   Acheter ticket
                 </button>
               </div>
@@ -89,7 +103,10 @@ const Page1 = () => {
                 <p className="event-card-details text-sm text-gray-600">{sport.date}</p>
                 <p className="event-card-details text-sm text-gray-600">{sport.location}</p>
                 <p className="event-card-ticket text-sm text-blue-600 font-semibold">{sport.Ticket}</p>
-                <button className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full">
+                <button
+                  className="event-button bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-full"
+                  onClick={() => handleBuyTicket(sport)}
+                >
                   Acheter ticket
                 </button>
               </div>
