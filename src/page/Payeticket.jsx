@@ -1,62 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
 
-const Payeticket = () => {
-  const [searchParams] = useSearchParams();
-  const [eventData, setEventData] = useState(null);
-  const [loading, setLoading] = useState(false);
+.payment-container h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
 
-  useEffect(() => {
-    const eventInfo = searchParams.get("event");
-    if (eventInfo) {
-      setEventData(JSON.parse(decodeURIComponent(eventInfo)));
-    }
-  }, [searchParams]);
+.payment-container p {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+}
 
-  const handlePayment = async () => {
-    if (!eventData) return;
-    
-    setLoading(true);
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}
 
-    try {
-      const response = await fetch("http://localhost:5000/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          eventId: eventData.id,
-          eventName: eventData.title,
-          price: eventData.price,
-        }),
-      });
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-      const { sessionId } = await response.json();
+button:hover {
+  background-color: #0056b3;
+}
 
-      if (sessionId) {
-        window.location.href = `https://checkout.stripe.com/pay/${sessionId}`;
-      }
-    } catch (error) {
-      console.error("Erreur lors du paiement :", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="payment-container">
-      {eventData ? (
-        <>
-          <h1>{eventData.title}</h1>
-          <p>{eventData.description}</p>
-          <p className="price">Prix du ticket : {eventData.price} €</p>
-          <button onClick={handlePayment} disabled={loading}>
-            {loading ? "Chargement..." : "Payer maintenant"}
-          </button>
-        </>
-      ) : (
-        <p>Aucune information sur l'événement</p>
-      )}
-    </div>
-  );
-};
-
-export default Payeticket;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
