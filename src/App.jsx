@@ -23,7 +23,7 @@ function App() {
     navigate("/createvent");
   };
 
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/createvent";
+  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket"].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">

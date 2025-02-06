@@ -129,12 +129,12 @@ body, html {
 }
 
 .cta-button.join {
-  background-color: #28a745;
+  background-color: #19a93a;
 }
 
 .cta-button:hover {
   transform: scale(1.1);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 15px rgba(5, 83, 32, 0.863);
 }
 
 /* ---- RESPONSIVE DESIGN ---- */
