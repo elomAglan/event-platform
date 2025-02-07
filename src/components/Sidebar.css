@@ -1,0 +1,112 @@
+/* Styles de la barre latérale */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #8383b5, #2a2a3c);
+  color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 20px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  z-index: 100;
+}
+
+/* Animation de survol de la barre latérale */
+.sidebar:hover {
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+  transform: translateX(0.05rem);
+}
+
+/* Header de la barre latérale */
+.sidebar-header {
+  text-align: center;
+  font-size: 1.6em;
+  font-weight: bold;
+  padding: 20px;
+  background: rgb(255, 255, 255);
+  border-bottom: 2px solid rgb(255, 255, 255);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #00bcd4; /* Couleur futuriste */
+}
+
+/* Menu de la barre latérale */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar-menu li {
+  padding: 18px 25px;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: background 0.4s ease-in-out, transform 0.3s ease;
+}
+
+/* Effet de survol des éléments */
+.sidebar-menu li:hover {
+  background: rgba(1, 128, 145, 0.638); /* Couleur au survol */
+  transform: translateX(10px);
+  cursor: pointer;
+}
+
+/* Liens du menu */
+.sidebar-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease-in-out;
+}
+
+.sidebar-link i {
+  margin-right: 15px;
+  font-size: 1.3em;
+  transition: transform 0.3s ease;
+}
+
+/* Animation des icônes au survol */
+.sidebar-link:hover i {
+  transform: rotate(20deg); /* Légère rotation des icônes */
+}
+
+/* Effet de survol sur les liens */
+.sidebar-link:hover {
+  color: #00bcd4;
+  font-weight: bold;
+}
+
+/* Menu collapsible (réduit) */
+.sidebar-collapsed {
+  width: 60px;
+  padding-top: 20px;
+}
+
+.sidebar-collapsed .sidebar-link {
+  font-size: 0.9em;
+  justify-content: center;
+}
+
+.sidebar-collapsed .sidebar-link i {
+  margin-right: 0;
+  font-size: 1.5em;
+}
+
+/* Animation sur le survol de chaque item */
+.sidebar-menu li:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 5px;
+  background: #00bcd4;
+  border-radius: 5px;
+}

@@ -6,7 +6,8 @@ import Footer from "./components/Footer";
 import Login from "./Authentification/Login";
 import Register from "./Authentification/Register";
 import Createvent from "./page/Createvent";
-import Payeticket from "./page/Payeticket"; // Import de la page Payeticket
+import Payeticket from "./page/Payeticket";
+import Gestionevent from "./page/Gestionevent";
 
 function App() {
   const location = useLocation();
@@ -23,7 +24,11 @@ function App() {
     navigate("/createvent");
   };
 
-  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket"].includes(location.pathname);
+  const handleManageEvent = () => {
+    navigate("/gestionevent");
+  };
+
+  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent"].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -45,20 +50,9 @@ function App() {
                     </p>
                   </div>
                   <div className="cta-section">
-                    <button
-                      className="cta-button create"
-                      aria-label="Créer un événement"
-                      onClick={handleCreateEvent}
-                    >
-                      Créer un événement
-                    </button>
-                    <button
-                      className="cta-button join"
-                      onClick={handleJoinEvent}
-                      aria-label="Participer à un événement"
-                    >
-                      Participer à un événement
-                    </button>
+                    <button className="cta-button create" onClick={handleCreateEvent}>Créer un événement</button>
+                    <button className="cta-button join" onClick={handleJoinEvent}>Participer à un événement</button>
+                    <button className="cta-button manage" onClick={handleManageEvent}>Gérer les ventes</button>
                   </div>
                 </header>
                 <section className="mt-20 md:mt-40 py-16">
@@ -71,9 +65,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/createvent" element={<Createvent />} />
-
-          {/* Nouvelle route pour la page de paiement */}
           <Route path="/payeticket" element={<Payeticket />} />
+          <Route path="/gestionevent" element={<Gestionevent />} /> {/* Nouvelle route pour la gestion */}
         </Routes>
       </main>
 

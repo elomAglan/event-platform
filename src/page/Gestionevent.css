@@ -1,0 +1,11 @@
+.gestionevent-container {
+  display: flex;
+}
+
+.content {
+  margin-left: 250px; /* Décale le contenu pour éviter qu'il soit caché derrière la sidebar */
+  padding: 20px;
+  flex-grow: 1;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
