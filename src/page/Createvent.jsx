@@ -3,22 +3,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// Barre de navigation stylisée avec Styled Components
-const Navbar = styled.nav`
-  background-color: #007bff;
-  padding: 1rem 2rem;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-`;
+
 
 const NavbarTitle = styled.div`
   font-size: 1.75rem;
@@ -30,7 +15,9 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 2rem;
   margin-top: 80px; /* Ajoute de l'espace pour la navbar */
+  margin-left: 300px; /* Décalage pour laisser la place à la sidebar */
 `;
+
 
 const Title = styled.h1`
   font-size: 2rem;
@@ -153,12 +140,7 @@ const CreateEvent = () => {
 
   return (
     <div>
-      {/* Barre de navigation */}
-      <Navbar>
-        <Link to="/">
-          <h1 className="logo">Eventify</h1> {/* Remplacez par votre logo */}
-        </Link>
-      </Navbar>
+     
 
       {/* Contenu centré */}
       <Container>

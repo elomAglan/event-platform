@@ -1,0 +1,105 @@
+/* Style global pour la page Dashboard */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7fafc; /* Fond clair pour la page */
+}
+
+/* La section Sidebar reste fixe et occupe une largeur de 250px */
+.dashboard-container .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #2d3748; /* Couleur sombre pour le Sidebar */
+  color: white;
+  padding: 20px;
+  z-index: 10; /* Assure que le Sidebar est au-dessus du contenu */
+}
+
+/* Style du contenu principal du Dashboard */
+.dashboard-container .dashboard-content {
+  margin-left: 250px; /* Décale le contenu pour qu'il commence après le Sidebar */
+  padding: 30px;
+  width: calc(100% - 250px); /* Ajuste la largeur pour tenir compte du Sidebar */
+  box-sizing: border-box;
+  background-color: #fff; /* Fond blanc pour le contenu */
+}
+
+/* Réduire le Sidebar et ajuster le contenu sur les écrans plus petits */
+@media screen and (max-width: 768px) {
+  .dashboard-container .sidebar {
+    width: 200px; /* Réduit la largeur du Sidebar sur mobile */
+  }
+
+  .dashboard-container .dashboard-content {
+    margin-left: 200px; /* Ajuste la marge du contenu */
+    width: calc(100% - 200px); /* Ajuste la largeur pour tenir compte du Sidebar réduit */
+  }
+}
+
+/* Pour les cartes statistiques (Utilisateurs, Événements, Revenu) */
+.dashboard-container .stat-card {
+  background-color: #2b6cb0; /* Couleur bleue plus saturée */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ajouter un effet de survol pour les cartes */
+.dashboard-container .stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Couleurs spécifiques pour chaque carte */
+.dashboard-container .stat-card.bg-blue-500 {
+  background-color: #2b6cb0; /* Bleu plus saturé */
+}
+
+.dashboard-container .stat-card.bg-green-500 {
+  background-color: #38a169; /* Vert plus saturé */
+}
+
+.dashboard-container .stat-card.bg-yellow-500 {
+  background-color: #d69e2e; /* Jaune plus saturé */
+}
+
+/* Icône dans la carte */
+.dashboard-container .stat-card .icon {
+  font-size: 2rem;
+  margin-right: 20px;
+  color: white; /* Texte blanc pour plus de contraste */
+}
+
+/* Titre et valeur dans la carte */
+.dashboard-container .stat-card .title {
+  font-size: 1rem;
+  color: #edf2f7; /* Titre plus clair pour un meilleur contraste */
+}
+
+.dashboard-container .stat-card .value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white; /* Valeur en blanc pour plus de contraste */
+}
+
+/* Graphique */
+.dashboard-container .chart-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .chart-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
