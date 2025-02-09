@@ -8,8 +8,9 @@ import Register from "./Authentification/Register";
 import Createvent from "./page/Createvent";
 import Payeticket from "./page/Payeticket";
 import Gestionevent from "./page/Gestionevent";
-import Dashboard from "./page/Dashboard"; // Assure-toi que le chemin est correct
+import Dashboard from "./page/Dashboard"; 
 import Sidebar from "./components/Sidebar";
+import Billet from "./page/Billet";  // Importer le composant Billet
 
 function App() {
   const location = useLocation();
@@ -30,21 +31,19 @@ function App() {
     navigate("/gestionevent");
   };
 
-  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent"].includes(location.pathname);
+  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent", "/billet"].includes(location.pathname);
   const isCreateEventPage = location.pathname === "/createvent";
-  const isDashboardPage = location.pathname === "/dashboard"; // Vérifie si on est sur la page Dashboard
+  const isDashboardPage = location.pathname === "/dashboard";
+  const isBilletPage = location.pathname === "/billet";  // Vérifie si on est sur la page Billet
 
-  // Exclure la Navbar et le Footer sur la page Dashboard et Createvent
-  const shouldDisplayNavbarAndFooter = !isCreateEventPage && !isDashboardPage;
+  const shouldDisplayNavbarAndFooter = !isCreateEventPage && !isDashboardPage && !isBilletPage;
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Affichage de la Navbar seulement si ce n'est pas la page Dashboard ou Createvent */}
       {shouldDisplayNavbarAndFooter && <Navbar />}
-      
+
       <main className="flex-grow flex">
-        {/* Affichage de la Sidebar sur Dashboard et Createvent */}
-        {(isCreateEventPage || isDashboardPage) && <Sidebar />}
+        {(isCreateEventPage || isDashboardPage || isBilletPage) && <Sidebar />} {/* Affiche la Sidebar pour Billet aussi */}
         
         <div className="flex-1">
           <Routes>
@@ -78,12 +77,12 @@ function App() {
             <Route path="/createvent" element={<Createvent />} />
             <Route path="/payeticket" element={<Payeticket />} />
             <Route path="/gestionevent" element={<Gestionevent />} />
-            <Route path="/dashboard" element={<Dashboard />} /> {/* Route pour Dashboard */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/billet" element={<Billet />} /> {/* Nouvelle route pour gérer les billets */}
           </Routes>
         </div>
       </main>
 
-      {/* Affichage du Footer seulement si ce n'est pas la page Dashboard ou Createvent */}
       {shouldDisplayNavbarAndFooter && <Footer />}
     </div>
   );

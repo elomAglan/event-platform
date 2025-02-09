@@ -20,7 +20,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/gestionevent" className="sidebar-link">
+          <Link to="/billet" className="sidebar-link">
             <i className="fas fa-ticket-alt"></i> Gérer les billets
           </Link>
         </li>
