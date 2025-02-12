@@ -11,6 +11,7 @@ import Gestionevent from "./page/Gestionevent";
 import Dashboard from "./page/Dashboard"; 
 import Sidebar from "./components/Sidebar";
 import Billet from "./page/Billet";  // Importer le composant Billet
+import Parametre from "./page/Parametre";  // Importer le composant Parametre
 
 function App() {
   const location = useLocation();
@@ -31,19 +32,20 @@ function App() {
     navigate("/gestionevent");
   };
 
-  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent", "/billet"].includes(location.pathname);
+  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent", "/billet", "/parametre"].includes(location.pathname);  // Ajoutez /parametre
   const isCreateEventPage = location.pathname === "/createvent";
   const isDashboardPage = location.pathname === "/dashboard";
   const isBilletPage = location.pathname === "/billet";  // Vérifie si on est sur la page Billet
+  const isParametrePage = location.pathname === "/parametre";  // Vérifie si on est sur la page Paramètre
 
-  const shouldDisplayNavbarAndFooter = !isCreateEventPage && !isDashboardPage && !isBilletPage;
+  const shouldDisplayNavbarAndFooter = !isCreateEventPage && !isDashboardPage && !isBilletPage && !isParametrePage;
 
   return (
     <div className="min-h-screen flex flex-col">
       {shouldDisplayNavbarAndFooter && <Navbar />}
 
       <main className="flex-grow flex">
-        {(isCreateEventPage || isDashboardPage || isBilletPage) && <Sidebar />} {/* Affiche la Sidebar pour Billet aussi */}
+        {(isCreateEventPage || isDashboardPage || isBilletPage || isParametrePage) && <Sidebar />} {/* Affiche la Sidebar pour Parametre aussi */}
         
         <div className="flex-1">
           <Routes>
@@ -78,7 +80,8 @@ function App() {
             <Route path="/payeticket" element={<Payeticket />} />
             <Route path="/gestionevent" element={<Gestionevent />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/billet" element={<Billet />} /> {/* Nouvelle route pour gérer les billets */}
+            <Route path="/billet" element={<Billet />} /> 
+            <Route path="/parametre" element={<Parametre />} /> {/* Nouvelle route pour les paramètres */}
           </Routes>
         </div>
       </main>
