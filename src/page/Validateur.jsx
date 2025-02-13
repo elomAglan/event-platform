@@ -1,55 +1,59 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import useValidateur from "./useValidateur";  // Importez le hook de validation
+import "./Validateur.css"; 
+const Validateur = () => {
+  const { errors, validate, isValid, resetErrors } = useValidateur();
+  const [ticketCode, setTicketCode] = useState("");
 
-const useValidateur = () => {
-  const [errors, setErrors] = useState({});
+  // Fonction de gestion de changement de champ
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTicketCode(value);
+    validate(name, value);  // Validation lors de la modification
+  };
 
-  // Fonction de validation des champs
-  const validate = (name, value) => {
-    let errorMessage = "";
-
-    switch (name) {
-      case "username":
-        if (!value.trim()) {
-          errorMessage = "Le nom d'utilisateur est requis.";
-        } else if (value.length < 3) {
-          errorMessage = "Le nom d'utilisateur doit contenir au moins 3 caractères.";
-        }
-        break;
-
-      case "email":
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value.trim()) {
-          errorMessage = "L'email est requis.";
-        } else if (!emailPattern.test(value)) {
-          errorMessage = "L'email n'est pas valide.";
-        }
-        break;
-
-      case "password":
-        if (!value.trim()) {
-          errorMessage = "Le mot de passe est requis.";
-        } else if (value.length < 6) {
-          errorMessage = "Le mot de passe doit contenir au moins 6 caractères.";
-        } else if (!/[A-Z]/.test(value)) {
-          errorMessage = "Le mot de passe doit contenir au moins une majuscule.";
-        } else if (!/[0-9]/.test(value)) {
-          errorMessage = "Le mot de passe doit contenir au moins un chiffre.";
-        }
-        break;
-
-      default:
-        break;
+  // Fonction de soumission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid()) {
+      // Effectuer la vérification de ticket ici (par exemple, appel API)
+      console.log("Ticket valide !");
+      alert("Ticket validé avec succès !");
+    } else {
+      console.log("Ticket invalide !");
     }
-
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
 
-  // Fonction pour vérifier si le formulaire est valide
-  const isValid = () => {
-    return Object.values(errors).every((error) => error === "");
+  // Fonction de réinitialisation
+  const handleReset = () => {
+    setTicketCode("");
+    resetErrors();  // Réinitialise les erreurs
   };
 
-  return { errors, validate, isValid };
+  return (
+    <div className="ticket-validation">
+      <h1>Validateur de Ticket</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Code du Ticket</label>
+          <input
+            type="text"
+            name="ticketCode"
+            value={ticketCode}
+            onChange={handleChange}
+            placeholder="Entrez votre code de ticket"
+          />
+          {errors.ticketCode && <div className="error-message">{errors.ticketCode}</div>}
+        </div>
+        <button type="submit" disabled={!isValid()}>
+          Valider le Ticket
+        </button>
+        <button type="button" onClick={handleReset}>
+          Réinitialiser
+        </button>
+      </form>
+    </div>
+  );
 };
 
-export default useValidateur;
+export default Validateur;

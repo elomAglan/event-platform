@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
-import useValidateur from "../page/Validateur"; // Importation du validateur
+import useValidateur from "../page/useValidateur"; // Importation du validateur
 import "./Parametre.css";
 
 const Parametre = () => {

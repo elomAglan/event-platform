@@ -7,11 +7,13 @@ import Login from "./Authentification/Login";
 import Register from "./Authentification/Register";
 import Createvent from "./page/Createvent";
 import Payeticket from "./page/Payeticket";
-import Gestionevent from "./page/Gestionevent";
-import Dashboard from "./page/Dashboard"; 
+import Gestionevent from "./page/Gestionevent"; 
+import Dashboard from "./page/Dashboard";
 import Sidebar from "./components/Sidebar";
-import Billet from "./page/Billet";  // Importer le composant Billet
-import Parametre from "./page/Parametre";  // Importer le composant Parametre
+import Billet from "./page/Billet";
+import Parametre from "./page/Parametre";
+import Profil from "./page/Profil"; // Import du composant Profil
+import Validateur from "./page/Validateur"; // Import du composant Validateur
 
 function App() {
   const location = useLocation();
@@ -32,20 +34,24 @@ function App() {
     navigate("/gestionevent");
   };
 
-  const isAuthPage = ["/login", "/register", "/createvent", "/payeticket", "/gestionevent", "/billet", "/parametre"].includes(location.pathname);  // Ajoutez /parametre
-  const isCreateEventPage = location.pathname === "/createvent";
-  const isDashboardPage = location.pathname === "/dashboard";
-  const isBilletPage = location.pathname === "/billet";  // Vérifie si on est sur la page Billet
-  const isParametrePage = location.pathname === "/parametre";  // Vérifie si on est sur la page Paramètre
-
-  const shouldDisplayNavbarAndFooter = !isCreateEventPage && !isDashboardPage && !isBilletPage && !isParametrePage;
+  // Pages nécessitant la Sidebar
+  const isAppPage = [
+    "/createvent",
+    "/payeticket",
+    "/gestionevent",
+    "/billet",
+    "/parametre",
+    "/dashboard",
+    "/profil",
+    "/validateur"
+  ].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
-      {shouldDisplayNavbarAndFooter && <Navbar />}
+      {!isAppPage && <Navbar />}
 
       <main className="flex-grow flex">
-        {(isCreateEventPage || isDashboardPage || isBilletPage || isParametrePage) && <Sidebar />} {/* Affiche la Sidebar pour Parametre aussi */}
+        {isAppPage && <Sidebar />} {/* Affichage de la Sidebar pour certaines pages */}
         
         <div className="flex-1">
           <Routes>
@@ -80,13 +86,15 @@ function App() {
             <Route path="/payeticket" element={<Payeticket />} />
             <Route path="/gestionevent" element={<Gestionevent />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/billet" element={<Billet />} /> 
-            <Route path="/parametre" element={<Parametre />} /> {/* Nouvelle route pour les paramètres */}
+            <Route path="/billet" element={<Billet />} />
+            <Route path="/parametre" element={<Parametre />} />
+            <Route path="/profil" element={<Profil />} /> {/* Route pour Profil */}
+            <Route path="/validateur" element={<Validateur />} /> {/* Route pour Validateur */}
           </Routes>
         </div>
       </main>
 
-      {shouldDisplayNavbarAndFooter && <Footer />}
+      {!isAppPage && <Footer />}
     </div>
   );
 }

@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Sidebar.css"; // Import du fichier CSS
+import { FaHome, FaCalendarPlus, FaCalendarAlt, FaTicketAlt, FaUserCheck, FaUser, FaCog, FaSignOutAlt } from "react-icons/fa";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
-  // Fonction de déconnexion
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // Suppression du token d'authentification
-    navigate("/login"); // Redirection vers la page de connexion
-  };
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }, [navigate]);
 
   return (
     <div className="sidebar">
@@ -19,42 +19,42 @@ const Sidebar = () => {
       <ul className="sidebar-menu">
         <li>
           <Link to="/dashboard" className="sidebar-link">
-            <i className="fas fa-home"></i> Tableau de bord
+            <FaHome className="sidebar-icon" /> Tableau de bord
           </Link>
         </li>
         <li>
           <Link to="/createvent" className="sidebar-link">
-            <i className="fas fa-calendar-plus"></i> Créer un événement
+            <FaCalendarPlus className="sidebar-icon" /> Créer un événement
           </Link>
         </li>
         <li>
-          <Link to="/evenements" className="sidebar-link">
-            <i className="fas fa-calendar-alt"></i> Événements
+          <Link to="/gestionevent" className="sidebar-link">
+            <FaCalendarAlt className="sidebar-icon" /> Événements
           </Link>
         </li>
         <li>
           <Link to="/billet" className="sidebar-link">
-            <i className="fas fa-ticket-alt"></i> Gérer les billets
+            <FaTicketAlt className="sidebar-icon" /> Gérer les billets
           </Link>
         </li>
         <li>
           <Link to="/validateur" className="sidebar-link">
-            <i className="fas fa-user-check"></i> Validateur
+            <FaUserCheck className="sidebar-icon" /> Validateur
           </Link>
         </li>
         <li>
           <Link to="/profil" className="sidebar-link">
-            <i className="fas fa-user"></i> Profil
+            <FaUser className="sidebar-icon" /> Profil
           </Link>
         </li>
         <li>
           <Link to="/parametre" className="sidebar-link">
-            <i className="fas fa-cog"></i> Paramètres
+            <FaCog className="sidebar-icon" /> Paramètres
           </Link>
         </li>
         <li>
           <button className="sidebar-link logout-button" onClick={handleLogout}>
-            <i className="fas fa-sign-out-alt"></i> Déconnexion
+            <FaSignOutAlt className="sidebar-icon" /> Déconnexion
           </button>
         </li>
       </ul>

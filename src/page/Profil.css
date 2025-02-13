@@ -1,0 +1,74 @@
+.profil-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profil-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.profil-card {
+  padding: 20px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.profil-field {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profil-field label {
+  font-weight: bold;
+  color: #555;
+}
+
+.profil-field span, .profil-field input {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.profil-field input {
+  padding: 8px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profil-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.profil-button.edit {
+  background: #007bff;
+  color: white;
+}
+
+.profil-button.edit:hover {
+  background: #0056b3;
+}
+
+.profil-button.save {
+  background: #28a745;
+  color: white;
+}
+
+.profil-button.save:hover {
+  background: #1e7e34;
+}
