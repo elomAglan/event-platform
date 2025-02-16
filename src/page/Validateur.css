@@ -1,83 +1,68 @@
-/* Styles de base pour le formulaire */
-.form-container {
-  max-width: 500px;
+/* Conteneur principal */
+.validateur-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7fafc; /* Fond clair pour la page */
+}
+
+/* Sidebar fixe */
+.validateur-container .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #2d3748;
+  color: white;
+  padding: 20px;
+  z-index: 10;
+}
+
+/* Conteneur du contenu principal */
+.validateur-container .validateur-content {
+  flex-grow: 1;
+  margin-left: 250px; /* Ajustement pour éviter le chevauchement */
+  padding: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Responsive pour les petits écrans */
+@media screen and (max-width: 768px) {
+  .validateur-container .sidebar {
+    width: 200px;
+  }
+
+  .validateur-container .validateur-content {
+    margin-left: 200px;
+  }
+}
+
+/* Formulaire */
+.validateur-container .form-container {
+  max-width: 550px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin-left: 220px; /* Décale le formulaire vers la droite pour laisser de la place à la barre de navigation */
-  margin-top: 20px; /* Ajoute un peu de marge en haut pour espacer le formulaire */
-  padding-top: 40px; /* Ajoute du padding pour que le contenu ne touche pas le bord supérieur */
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #333;
-  transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-input[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-/* Styles pour les messages d'erreur */
-.error-message {
+/* Erreurs */
+.validateur-container .error-message {
   color: #e74c3c;
   font-size: 14px;
   margin-top: 5px;
 }
 
-.error-message::before {
+.validateur-container .error-message::before {
   content: "⚠️ ";
   margin-right: 5px;
 }
 
-/* Couleurs pour les champs en erreur */
-input[type="text"].error,
-input[type="email"].error,
-input[type="password"].error {
-  border-color: #e74c3c;
-}
-
-input[type="text"].error:focus,
-input[type="email"].error:focus,
-input[type="password"].error:focus {
-  border-color: #e74c3c;
+/* Ajustement sous la navbar */
+.validateur-container .ticket-validation {
+  margin-top: 80px;
+  padding: 20px;
 }
