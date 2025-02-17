@@ -1,63 +1,83 @@
-import React, { useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaCalendarPlus, FaCalendarAlt, FaTicketAlt, FaUserCheck, FaUser, FaCog, FaSignOutAlt } from "react-icons/fa";
-import "./Sidebar.css";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faChartBar,
+  faPlusCircle,
+  faCog,
+  faTicketAlt,
+  faUser,
+  faCheckCircle,
+  faSignOutAlt,
+  faClipboardList
+} from "@fortawesome/free-solid-svg-icons";
+import "./Sidebar.css"; // ✅ Import du CSS
+
+const PATHS = {
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  CREATE_EVENT: "/createvent",
+  MANAGE_EVENT: "/gestionevent",
+  TICKETS: "/billet",
+  SETTINGS: "/parametre",
+  PROFILE: "/profil",
+  VALIDATOR: "/validateur",
+};
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  }, [navigate]);
+  // ✅ Fonction de déconnexion
+  const handleLogout = () => {
+    console.log("Déconnexion réussie");
+    navigate(PATHS.HOME);
+  };
+
+  // ✅ Tableau des liens avec icônes
+  const navLinks = [
+    { to: PATHS.DASHBOARD, label: "Dashboard", icon: faChartBar },
+    { to: PATHS.CREATE_EVENT, label: "Créer un événement", icon: faPlusCircle },
+    { to: PATHS.MANAGE_EVENT, label: "Gérer les événements", icon: faClipboardList },  // Nouveau changement ici
+    { to: PATHS.TICKETS, label: "Mes Billets", icon: faTicketAlt },
+    { to: PATHS.SETTINGS, label: "Paramètres", icon: faCog },
+    { to: PATHS.PROFILE, label: "Profil", icon: faUser },
+    { to: PATHS.VALIDATOR, label: "Validateur", icon: faCheckCircle },
+];
+
 
   return (
     <div className="sidebar">
+      {/* En-tête */}
       <div className="sidebar-header">
         <h2>Eventify</h2>
       </div>
+
+      {/* Bouton Accueil */}
+      <button className="home-button" onClick={() => navigate(PATHS.HOME)}>
+        <FontAwesomeIcon icon={faHome} className="icon" /> Accueil
+      </button>
+
+      {/* Menu de navigation */}
       <ul className="sidebar-menu">
-        <li>
-          <Link to="/dashboard" className="sidebar-link">
-            <FaHome className="sidebar-icon" /> Tableau de bord
-          </Link>
-        </li>
-        <li>
-          <Link to="/createvent" className="sidebar-link">
-            <FaCalendarPlus className="sidebar-icon" /> Créer un événement
-          </Link>
-        </li>
-        <li>
-          <Link to="/gestionevent" className="sidebar-link">
-            <FaCalendarAlt className="sidebar-icon" /> Événements
-          </Link>
-        </li>
-        <li>
-          <Link to="/billet" className="sidebar-link">
-            <FaTicketAlt className="sidebar-icon" /> Gérer les billets
-          </Link>
-        </li>
-        <li>
-          <Link to="/validateur" className="sidebar-link">
-            <FaUserCheck className="sidebar-icon" /> Validateur
-          </Link>
-        </li>
-        <li>
-          <Link to="/profil" className="sidebar-link">
-            <FaUser className="sidebar-icon" /> Profil
-          </Link>
-        </li>
-        <li>
-          <Link to="/parametre" className="sidebar-link">
-            <FaCog className="sidebar-icon" /> Paramètres
-          </Link>
-        </li>
-        <li>
-          <button className="sidebar-link logout-button" onClick={handleLogout}>
-            <FaSignOutAlt className="sidebar-icon" /> Déconnexion
-          </button>
-        </li>
+        {navLinks.map((link, index) => (
+          <li key={index}>
+            <NavLink
+              to={link.to}
+              className={({ isActive }) =>
+                isActive ? "sidebar-link active" : "sidebar-link"
+              }
+            >
+              <FontAwesomeIcon icon={link.icon} className="icon" /> {link.label}
+            </NavLink>
+          </li>
+        ))}
       </ul>
+
+      {/* Bouton de déconnexion */}
+      <button className="logout-button" onClick={handleLogout}>
+        <FontAwesomeIcon icon={faSignOutAlt} className="icon" /> Déconnexion
+      </button>
     </div>
   );
 };

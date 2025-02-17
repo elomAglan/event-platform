@@ -28,37 +28,32 @@ const Validateur = () => {
 
   return (
     <div className="validateur-container">
-      <div className="sidebar">
-        <h2>Menu</h2>
-        <ul>
-          <li>Accueil</li>
-          <li>Validation</li>
-          <li>Paramètres</li>
-        </ul>
-      </div>
-
       <div className="validateur-content">
         <h1>Validateur de Ticket</h1>
         <form onSubmit={handleSubmit} className="form-container">
-          <div>
-            <label>Code du Ticket</label>
+          <div className={`input-group ${errors.ticketCode ? "error" : ""}`}>
+            <label htmlFor="ticketCode">Code du Ticket</label>
             <input
               type="text"
               name="ticketCode"
+              id="ticketCode"
               value={ticketCode}
               onChange={handleChange}
               placeholder="Entrez votre code de ticket"
+              className={errors.ticketCode ? "input-error" : ""}
             />
             {errors.ticketCode && (
               <div className="error-message">{errors.ticketCode}</div>
             )}
           </div>
-          <button type="submit" disabled={!isValid()}>
-            Valider le Ticket
-          </button>
-          <button type="button" onClick={handleReset}>
-            Réinitialiser
-          </button>
+          <div className="button-group">
+            <button type="submit" disabled={!isValid()}>
+              Valider le Ticket
+            </button>
+            <button type="button" onClick={handleReset}>
+              Réinitialiser
+            </button>
+          </div>
         </form>
       </div>
     </div>

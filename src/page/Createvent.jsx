@@ -9,7 +9,11 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 2rem;
   margin-top: 80px;
-  margin-left: 300px;
+  margin-left: 300px; /* Largeur de la sidebar */
+  margin-right: 2rem;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     margin-left: 0;
@@ -20,7 +24,7 @@ const Container = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #2c3e50;
 `;
 
@@ -39,7 +43,7 @@ const Progress = styled.div`
   height: 8px;
   background-color: #6c5ce7;
   border-radius: 9999px;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.5s ease-in-out;
 `;
 
 const StepTitle = styled.h2`
@@ -51,11 +55,12 @@ const StepTitle = styled.h2`
 const Input = styled.input`
   width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
+  transition: border-color 0.3s ease-in-out;
 
   &:focus {
     outline: none;
@@ -67,7 +72,7 @@ const Input = styled.input`
 const Textarea = styled.textarea`
   width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -90,11 +95,11 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  margin-right: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
   &:hover {
     background-color: ${(props) => (props.primary ? "#5a4dbf" : "#00997b")};
+    transform: translateY(-2px);
   }
 
   &:disabled {
@@ -106,10 +111,9 @@ const Button = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
-// Réducteur pour gérer les données du formulaire
 const formReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_FIELD":
@@ -125,28 +129,13 @@ const initialState = {
   title: "",
   description: "",
   category: "",
-  tags: "",
   organizer: "",
   locationName: "",
-  locationAddress: "",
-  onlineLink: "",
-  language: "",
   startDate: "",
   endDate: "",
-  estimatedDuration: "",
-  arrivalTime: "",
   ticketType: "",
   maxCapacity: "",
   registrationDeadline: "",
-  promoCode: "",
-  program: "",
-  speakers: "",
-  sponsors: "",
-  partners: "",
-  materials: "",
-  prerequisites: "",
-  accessibility: "",
-  image: null,
 };
 
 const CreateEvent = () => {
@@ -193,7 +182,7 @@ const CreateEvent = () => {
 
         <ProgressBarContainer>
           <ProgressBar>
-            <Progress style={{ width: `${((step - 1) / 5) * 100}%` }} />
+            <Progress style={{ width: `${((step - 1) / 3) * 100}%` }} />
           </ProgressBar>
         </ProgressBarContainer>
 
@@ -213,7 +202,7 @@ const CreateEvent = () => {
                 Précédent
               </Button>
             )}
-            {step < 6 ? (
+            {step < 3 ? (
               <Button type="button" onClick={nextStep} primary disabled={!validateStep(step)}>
                 Suivant
               </Button>
@@ -231,7 +220,6 @@ const CreateEvent = () => {
   );
 };
 
-// Composant pour la modal de confirmation
 const ConfirmationModal = ({ onClose }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8 }}
@@ -259,7 +247,6 @@ const ConfirmationModal = ({ onClose }) => (
   </motion.div>
 );
 
-// Fonction pour rendre les étapes du formulaire
 const renderStep = (step, formState, handleChange) => {
   switch (step) {
     case 1:
@@ -272,7 +259,24 @@ const renderStep = (step, formState, handleChange) => {
           <Input type="text" name="organizer" placeholder="Organisateur" value={formState.organizer} onChange={handleChange} required />
         </div>
       );
-    // Ajoutez les autres étapes ici...
+    case 2:
+      return (
+        <div>
+          <StepTitle>Étape 2 : Lieu et dates</StepTitle>
+          <Input type="text" name="locationName" placeholder="Nom du lieu" value={formState.locationName} onChange={handleChange} required />
+          <Input type="date" name="startDate" placeholder="Date de début" value={formState.startDate} onChange={handleChange} required />
+          <Input type="date" name="endDate" placeholder="Date de fin" value={formState.endDate} onChange={handleChange} required />
+        </div>
+      );
+    case 3:
+      return (
+        <div>
+          <StepTitle>Étape 3 : Informations sur les billets</StepTitle>
+          <Input type="text" name="ticketType" placeholder="Type de billet" value={formState.ticketType} onChange={handleChange} required />
+          <Input type="number" name="maxCapacity" placeholder="Capacité maximale" value={formState.maxCapacity} onChange={handleChange} required />
+          <Input type="date" name="registrationDeadline" placeholder="Date limite d'inscription" value={formState.registrationDeadline} onChange={handleChange} required />
+        </div>
+      );
     default:
       return null;
   }
