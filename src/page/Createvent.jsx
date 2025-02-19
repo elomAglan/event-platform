@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
-// 🔹 Styles pour la barre de progression
 const ProgressBarContainer = styled.div`
   width: 100%;
   height: 8px;
   background-color: #e0e0e0;
   border-radius: 10px;
   margin-bottom: 20px;
+  overflow: hidden;
 `;
 
 const ProgressBar = styled.div`
@@ -18,32 +18,48 @@ const ProgressBar = styled.div`
   transition: width 0.4s ease-in-out;
 `;
 
-// 🔹 Styles du conteneur principal
 const FormContainer = styled.div`
-  width: 400px;
-  margin: auto;
+  max-width: 400px;
+  margin: 20px auto;
   background: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
 `;
 
-// 🔹 Style du bouton
 const Button = styled.button`
   background-color: ${(props) => (props.primary ? "#6c5ce7" : "#ddd")};
   color: ${(props) => (props.primary ? "white" : "black")};
   border: none;
-  padding: 10px 15px;
+  padding: 12px 20px;
   margin: 10px 5px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
+  font-weight: bold;
   transition: background 0.3s;
 
   &:hover {
     background-color: ${(props) => (props.primary ? "#4834d4" : "#bbb")};
   }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
 `;
 
 const CreateEvent = () => {
@@ -57,28 +73,14 @@ const CreateEvent = () => {
     eventDescription: "",
   });
 
-  // 🔹 Gestion des changements dans les champs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Validation des étapes avant de passer à la suivante
   const validateStep = () => {
-    switch (step) {
-      case 1:
-        return formData.eventName.trim() !== "";
-      case 2:
-        return formData.eventDate.trim() !== "";
-      case 3:
-        return formData.eventLocation.trim() !== "";
-      case 4:
-        return formData.eventDescription.trim() !== "";
-      default:
-        return false;
-    }
+    return Object.values(formData)[step - 1].trim() !== "";
   };
 
-  // 🔹 Passe à l’étape suivante si la validation est OK
   const nextStep = () => {
     if (validateStep()) {
       setStep(step + 1);
@@ -88,13 +90,11 @@ const CreateEvent = () => {
     }
   };
 
-  // 🔹 Revient à l’étape précédente
   const prevStep = () => {
     setStep(step - 1);
     setProgress(((step - 1) / 4) * 100);
   };
 
-  // 🔹 Affiche le modal après la soumission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep()) {
@@ -106,59 +106,48 @@ const CreateEvent = () => {
   return (
     <FormContainer>
       <h2>Créer un Événement</h2>
-
-      {/* Barre de progression */}
       <ProgressBarContainer>
         <ProgressBar style={{ width: `${progress}%` }} />
       </ProgressBarContainer>
-
-      {/* Affichage dynamique des étapes */}
       <AnimatePresence mode="wait">
         {step === 1 && (
           <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <label>Nom de l'événement</label>
-            <input type="text" name="eventName" value={formData.eventName} onChange={handleChange} required />
+            <Input type="text" name="eventName" value={formData.eventName} onChange={handleChange} required />
           </motion.div>
         )}
         {step === 2 && (
           <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <label>Date de l'événement</label>
-            <input type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
+            <Input type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
           </motion.div>
         )}
         {step === 3 && (
           <motion.div key="step3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <label>Lieu de l'événement</label>
-            <input type="text" name="eventLocation" value={formData.eventLocation} onChange={handleChange} required />
+            <Input type="text" name="eventLocation" value={formData.eventLocation} onChange={handleChange} required />
           </motion.div>
         )}
         {step === 4 && (
           <motion.div key="step4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <label>Description</label>
-            <textarea name="eventDescription" value={formData.eventDescription} onChange={handleChange} required />
+            <TextArea name="eventDescription" value={formData.eventDescription} onChange={handleChange} required />
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Boutons de navigation */}
       <div>
         {step > 1 && <Button onClick={prevStep}>Retour</Button>}
         {step < 4 ? (
-          <Button primary onClick={nextStep}>
-            Suivant
-          </Button>
+          <Button primary onClick={nextStep}>Suivant</Button>
         ) : (
           <Button primary onClick={handleSubmit}>Créer</Button>
         )}
       </div>
-
-      {/* Modal de confirmation */}
       {showModal && <Modal onClose={() => setShowModal(false)} />}
     </FormContainer>
   );
 };
 
-// 🔹 Modal de confirmation stylisé
 const Modal = ({ onClose }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.8 }}
