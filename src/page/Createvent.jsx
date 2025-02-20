@@ -19,12 +19,12 @@ const ProgressBar = styled.div`
 `;
 
 const FormContainer = styled.div`
-  max-width: 400px;
-  margin: 20px auto;
+  max-width: 500px;
+  margin: 40px auto;
   background: white;
-  padding: 25px;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
   text-align: center;
 `;
 
@@ -47,7 +47,7 @@ const Button = styled.button`
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -55,7 +55,7 @@ const Input = styled.input`
 
 const TextArea = styled.textarea`
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -64,13 +64,15 @@ const TextArea = styled.textarea`
 
 const CreateEvent = () => {
   const [step, setStep] = useState(1);
-  const [progress, setProgress] = useState(25);
+  const [progress, setProgress] = useState(16.6);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
     eventLocation: "",
     eventDescription: "",
+    phoneNumber: "",
+    paymentInfo: "",
   });
 
   const handleChange = (e) => {
@@ -84,7 +86,7 @@ const CreateEvent = () => {
   const nextStep = () => {
     if (validateStep()) {
       setStep(step + 1);
-      setProgress(((step + 1) / 4) * 100);
+      setProgress(((step + 1) / 6) * 100);
     } else {
       alert("Veuillez remplir ce champ avant de continuer.");
     }
@@ -92,7 +94,7 @@ const CreateEvent = () => {
 
   const prevStep = () => {
     setStep(step - 1);
-    setProgress(((step - 1) / 4) * 100);
+    setProgress(((step - 1) / 6) * 100);
   };
 
   const handleSubmit = (e) => {
@@ -105,7 +107,7 @@ const CreateEvent = () => {
 
   return (
     <FormContainer>
-      <h2>Créer un Événement</h2>
+      <h2>Créer un Événement Sécurisé</h2>
       <ProgressBarContainer>
         <ProgressBar style={{ width: `${progress}%` }} />
       </ProgressBarContainer>
@@ -134,10 +136,22 @@ const CreateEvent = () => {
             <TextArea name="eventDescription" value={formData.eventDescription} onChange={handleChange} required />
           </motion.div>
         )}
+        {step === 5 && (
+          <motion.div key="step5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <label>Numéro de téléphone</label>
+            <Input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+          </motion.div>
+        )}
+        {step === 6 && (
+          <motion.div key="step6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <label>Informations de paiement</label>
+            <Input type="text" name="paymentInfo" value={formData.paymentInfo} onChange={handleChange} required />
+          </motion.div>
+        )}
       </AnimatePresence>
       <div>
         {step > 1 && <Button onClick={prevStep}>Retour</Button>}
-        {step < 4 ? (
+        {step < 6 ? (
           <Button primary onClick={nextStep}>Suivant</Button>
         ) : (
           <Button primary onClick={handleSubmit}>Créer</Button>
@@ -150,26 +164,19 @@ const CreateEvent = () => {
 
 const Modal = ({ onClose }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.8 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.8 }}
-    transition={{ type: "spring", stiffness: 120, damping: 14 }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }}
     style={{
-      position: "fixed",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#ffffff",
-      padding: "2rem",
-      borderRadius: "1rem",
-      textAlign: "center",
-      zIndex: 1002,
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-    }}
-  >
-    <h2>✅ Événement créé avec succès !</h2>
-    <p>Votre événement est prêt. Vous pouvez maintenant le gérer depuis votre tableau de bord.</p>
-    <Button primary onClick={onClose}>OK</Button>
+      position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
+      backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex",
+      alignItems: "center", justifyContent: "center", zIndex: 1000,
+    }}>
+    <motion.div style={{ backgroundColor: "#fff", padding: "2rem", borderRadius: "1rem", textAlign: "center" }}>
+      <h2>✅ Événement sécurisé créé avec succès !</h2>
+      <Button primary onClick={onClose}>OK</Button>
+    </motion.div>
   </motion.div>
 );
 
