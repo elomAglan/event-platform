@@ -1,48 +1,30 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 
-const ProgressBarContainer = styled.div`
-  width: 100%;
-  height: 8px;
-  background-color: #e0e0e0;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  overflow: hidden;
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  margin-right: 50px; // Ajustez cet espace selon vos besoins
 `;
 
-const ProgressBar = styled.div`
-  height: 100%;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #6c5ce7 0%, #a29bfe 100%);
-  transition: width 0.4s ease-in-out;
-`;
 
 const FormContainer = styled.div`
-  max-width: 500px;
-  margin: 40px auto;
+  max-width: 900px;
   background: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-  text-align: center;
+  margin-left: 50px;
+  width: 100%;
 `;
 
-const Button = styled.button`
-  background-color: ${(props) => (props.primary ? "#6c5ce7" : "#ddd")};
-  color: ${(props) => (props.primary ? "white" : "black")};
-  border: none;
-  padding: 12px 20px;
-  margin: 10px 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s;
-
-  &:hover {
-    background-color: ${(props) => (props.primary ? "#4834d4" : "#bbb")};
-  }
+const Title = styled.h2`
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6c5ce7;
 `;
 
 const Input = styled.input`
@@ -62,122 +44,238 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+const Button = styled.button`
+  width: 100%;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #4834d4;
+  }
+`;
+
+const ProgressBar = styled.div`
+  height: 5px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+  border-radius: 5px;
+`;
+
+const Progress = styled.div`
+  height: 100%;
+  width: ${({ progress }) => progress}%;
+  background-color: #6c5ce7;
+  border-radius: 5px;
+`;
+
+const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+`;
+
 const CreateEvent = () => {
-  const [step, setStep] = useState(1);
-  const [progress, setProgress] = useState(16.6);
-  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     eventName: "",
-    eventDate: "",
-    eventLocation: "",
     eventDescription: "",
+    eventDate: "",
+    eventTime: "",
+    eventLocation: "",
+    capacity: "",
+    ticketPrice: "",
+    coverImage: "",
+    category: "",
+    organizerEmail: "",
     phoneNumber: "",
-    paymentInfo: "",
+    paymentInfo: ""
   });
+
+  const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const validateStep = () => {
-    return Object.values(formData)[step - 1].trim() !== "";
+    const newErrors = {};
+    if (currentStep === 1) {
+      if (!formData.eventName) newErrors.eventName = "Le nom de l'événement est requis";
+      if (!formData.eventDescription) newErrors.eventDescription = "La description est requise";
+      if (!formData.eventDate) newErrors.eventDate = "La date est requise";
+      if (!formData.eventTime) newErrors.eventTime = "L'heure est requise";
+      if (!formData.eventLocation) newErrors.eventLocation = "Le lieu est requis";
+    } else if (currentStep === 2) {
+      if (!formData.capacity) newErrors.capacity = "La capacité est requise";
+      if (!formData.ticketPrice) newErrors.ticketPrice = "Le prix des billets est requis";
+      if (!formData.coverImage) newErrors.coverImage = "L'image de couverture est requise";
+      if (!formData.category) newErrors.category = "La catégorie est requise";
+      if (!formData.organizerEmail) newErrors.organizerEmail = "L'email de l'organisateur est requis";
+      if (!formData.phoneNumber) newErrors.phoneNumber = "Le numéro de téléphone est requis";
+      if (!formData.paymentInfo) newErrors.paymentInfo = "Les informations de paiement sont requises";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const nextStep = () => {
+  const handleNext = () => {
     if (validateStep()) {
-      setStep(step + 1);
-      setProgress(((step + 1) / 6) * 100);
-    } else {
-      alert("Veuillez remplir ce champ avant de continuer.");
+      setCurrentStep(currentStep + 1);
     }
   };
 
-  const prevStep = () => {
-    setStep(step - 1);
-    setProgress(((step - 1) / 6) * 100);
+  const handlePrev = () => {
+    setCurrentStep(currentStep - 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateStep()) {
-      setProgress(100);
-      setTimeout(() => setShowModal(true), 500);
-    }
+    console.log("Événement créé avec succès", formData);
+    alert("Événement créé avec succès !");
   };
 
+  const progress = (currentStep / 2) * 100;
+
   return (
-    <FormContainer>
-      <h2>Créer un Événement Sécurisé</h2>
-      <ProgressBarContainer>
-        <ProgressBar style={{ width: `${progress}%` }} />
-      </ProgressBarContainer>
-      <AnimatePresence mode="wait">
-        {step === 1 && (
-          <motion.div key="step1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Nom de l'événement</label>
-            <Input type="text" name="eventName" value={formData.eventName} onChange={handleChange} required />
-          </motion.div>
-        )}
-        {step === 2 && (
-          <motion.div key="step2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Date de l'événement</label>
-            <Input type="date" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
-          </motion.div>
-        )}
-        {step === 3 && (
-          <motion.div key="step3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Lieu de l'événement</label>
-            <Input type="text" name="eventLocation" value={formData.eventLocation} onChange={handleChange} required />
-          </motion.div>
-        )}
-        {step === 4 && (
-          <motion.div key="step4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Description</label>
-            <TextArea name="eventDescription" value={formData.eventDescription} onChange={handleChange} required />
-          </motion.div>
-        )}
-        {step === 5 && (
-          <motion.div key="step5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Numéro de téléphone</label>
-            <Input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
-          </motion.div>
-        )}
-        {step === 6 && (
-          <motion.div key="step6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <label>Informations de paiement</label>
-            <Input type="text" name="paymentInfo" value={formData.paymentInfo} onChange={handleChange} required />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div>
-        {step > 1 && <Button onClick={prevStep}>Retour</Button>}
-        {step < 6 ? (
-          <Button primary onClick={nextStep}>Suivant</Button>
-        ) : (
-          <Button primary onClick={handleSubmit}>Créer</Button>
-        )}
-      </div>
-      {showModal && <Modal onClose={() => setShowModal(false)} />}
-    </FormContainer>
+    <PageContainer>
+      <FormContainer>
+        <Title>Processus de création d'événement</Title>
+        <ProgressBar>
+          <Progress progress={progress} />
+        </ProgressBar>
+        <form onSubmit={handleSubmit}>
+          {currentStep === 1 && (
+            <>
+              <FormRow>
+                <Input
+                  type="text"
+                  name="eventName"
+                  placeholder="Titre de l’événement"
+                  onChange={handleChange}
+                  required
+                />
+                <TextArea
+                  name="eventDescription"
+                  placeholder="Description détaillée"
+                  rows="4"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+              <FormRow>
+                <Input
+                  type="date"
+                  name="eventDate"
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="time"
+                  name="eventTime"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+              <FormRow>
+                <Input
+                  type="text"
+                  name="eventLocation"
+                  placeholder="Lieu (Adresse ou lien en ligne)"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+            </>
+          )}
+          {currentStep === 2 && (
+            <>
+              <FormRow>
+                <Input
+                  type="number"
+                  name="capacity"
+                  placeholder="Capacité maximale"
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="text"
+                  name="ticketPrice"
+                  placeholder="Prix des billets (gratuit ou payant)"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+              <FormRow>
+                <Input
+                  type="text"
+                  name="coverImage"
+                  placeholder="Lien de l'image de couverture"
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="text"
+                  name="category"
+                  placeholder="Catégorie de l’événement"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+              <FormRow>
+                <Input
+                  type="email"
+                  name="organizerEmail"
+                  placeholder="Email de l'organisateur"
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  type="tel"
+                  name="phoneNumber"
+                  placeholder="Numéro de téléphone"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+              <FormRow>
+                <Input
+                  type="text"
+                  name="paymentInfo"
+                  placeholder="Informations de paiement"
+                  onChange={handleChange}
+                  required
+                />
+              </FormRow>
+            </>
+          )}
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {currentStep > 1 && <Button type="button" onClick={handlePrev}>Précédent</Button>}
+            {currentStep < 2 ? (
+              <Button type="button" onClick={handleNext}>Suivant</Button>
+            ) : (
+              <Button type="submit">Créer l'événement</Button>
+            )}
+          </div>
+          {Object.values(errors).length > 0 && (
+            <div style={{ color: "red", marginTop: "10px" }}>
+              {Object.values(errors).map((error, index) => (
+                <div key={index}>{error}</div>
+              ))}
+            </div>
+          )}
+        </form>
+      </FormContainer>
+    </PageContainer>
   );
 };
-
-const Modal = ({ onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.3 }}
-    style={{
-      position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
-      backgroundColor: "rgba(0, 0, 0, 0.5)", display: "flex",
-      alignItems: "center", justifyContent: "center", zIndex: 1000,
-    }}>
-    <motion.div style={{ backgroundColor: "#fff", padding: "2rem", borderRadius: "1rem", textAlign: "center" }}>
-      <h2>✅ Événement sécurisé créé avec succès !</h2>
-      <Button primary onClick={onClose}>OK</Button>
-    </motion.div>
-  </motion.div>
-);
 
 export default CreateEvent;
