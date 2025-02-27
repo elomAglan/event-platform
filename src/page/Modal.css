@@ -9,6 +9,14 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  opacity: 0; /* Initialement caché */
+  pointer-events: none; /* Empêche les interactions tant que le modal n'est pas visible */
+  transition: opacity 0.3s ease; /* Transition de visibilité */
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto; /* Permet les interactions quand modal est visible */
 }
 
 .modal {
