@@ -1,0 +1,110 @@
+/* Styles généraux */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Conteneur principal */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Titre */
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #6c5ce7;
+  margin-bottom: 20px;
+}
+
+/* Formulaire */
+.form-container {
+  max-width: 900px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Champs de saisie */
+input,
+textarea {
+  width: 200px; /* Fixer la largeur à 200px */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+/* Boutons */
+.button {
+  width: 100%;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  padding: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #4834d4;
+}
+
+/* Barre de progression */
+.progress-bar {
+  height: 5px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #6c5ce7;
+  border-radius: 5px;
+}
+
+/* Disposition des champs côte à côte */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-row .input-item {
+  width: calc(50% - 10px); /* 50% de la largeur moins l'écart entre les champs */
+}
+
+.form-row .input-item input,
+.form-row .input-item textarea {
+  width: 200px; /* Fixer la largeur à 200px pour chaque champ */
+}
+
+/* Pour les écrans plus petits, ajuster les éléments pour les empiler verticalement */
+@media (max-width: 768px) {
+  .form-row .input-item {
+    width: 100%; /* Faire les champs 100% de la largeur sur les petits écrans */
+  }
+}

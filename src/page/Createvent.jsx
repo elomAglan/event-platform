@@ -1,86 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-
-const PageContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-  margin-right: 50px; // Ajustez cet espace selon vos besoins
-`;
-
-
-const FormContainer = styled.div`
-  max-width: 900px;
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-  margin-left: 50px;
-  width: 100%;
-`;
-
-const Title = styled.h2`
-  text-align: center;
-  margin-bottom: 20px;
-  color: #6c5ce7;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: none;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  background-color: #6c5ce7;
-  color: white;
-  border: none;
-  padding: 12px;
-  margin-top: 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s;
-
-  &:hover {
-    background-color: #4834d4;
-  }
-`;
-
-const ProgressBar = styled.div`
-  height: 5px;
-  background-color: #ccc;
-  margin-bottom: 20px;
-  border-radius: 5px;
-`;
-
-const Progress = styled.div`
-  height: 100%;
-  width: ${({ progress }) => progress}%;
-  background-color: #6c5ce7;
-  border-radius: 5px;
-`;
-
-const FormRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-`;
+import "./CreateEvent.css";
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
@@ -122,7 +41,6 @@ const CreateEvent = () => {
       if (!formData.phoneNumber) newErrors.phoneNumber = "Le numéro de téléphone est requis";
       if (!formData.paymentInfo) newErrors.paymentInfo = "Les informations de paiement sont requises";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -143,138 +61,137 @@ const CreateEvent = () => {
     alert("Événement créé avec succès !");
   };
 
-  const progress = (currentStep / 2) * 100;
-
   return (
-    <PageContainer>
-      <FormContainer>
-        <Title>Processus de création d'événement</Title>
-        <ProgressBar>
-          <Progress progress={progress} />
-        </ProgressBar>
-        <form onSubmit={handleSubmit}>
-          {currentStep === 1 && (
-            <>
-              <FormRow>
-                <Input
-                  type="text"
-                  name="eventName"
-                  placeholder="Titre de l’événement"
-                  onChange={handleChange}
-                  required
-                />
-                <TextArea
-                  name="eventDescription"
-                  placeholder="Description détaillée"
-                  rows="4"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-              <FormRow>
-                <Input
-                  type="date"
-                  name="eventDate"
-                  onChange={handleChange}
-                  required
-                />
-                <Input
-                  type="time"
-                  name="eventTime"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-              <FormRow>
-                <Input
-                  type="text"
-                  name="eventLocation"
-                  placeholder="Lieu (Adresse ou lien en ligne)"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-            </>
-          )}
-          {currentStep === 2 && (
-            <>
-              <FormRow>
-                <Input
-                  type="number"
-                  name="capacity"
-                  placeholder="Capacité maximale"
-                  onChange={handleChange}
-                  required
-                />
-                <Input
-                  type="text"
-                  name="ticketPrice"
-                  placeholder="Prix des billets (gratuit ou payant)"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-              <FormRow>
-                <Input
-                  type="text"
-                  name="coverImage"
-                  placeholder="Lien de l'image de couverture"
-                  onChange={handleChange}
-                  required
-                />
-                <Input
-                  type="text"
-                  name="category"
-                  placeholder="Catégorie de l’événement"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-              <FormRow>
-                <Input
-                  type="email"
-                  name="organizerEmail"
-                  placeholder="Email de l'organisateur"
-                  onChange={handleChange}
-                  required
-                />
-                <Input
-                  type="tel"
-                  name="phoneNumber"
-                  placeholder="Numéro de téléphone"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-              <FormRow>
-                <Input
-                  type="text"
-                  name="paymentInfo"
-                  placeholder="Informations de paiement"
-                  onChange={handleChange}
-                  required
-                />
-              </FormRow>
-            </>
-          )}
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {currentStep > 1 && <Button type="button" onClick={handlePrev}>Précédent</Button>}
-            {currentStep < 2 ? (
-              <Button type="button" onClick={handleNext}>Suivant</Button>
-            ) : (
-              <Button type="submit">Créer l'événement</Button>
-            )}
-          </div>
-          {Object.values(errors).length > 0 && (
-            <div style={{ color: "red", marginTop: "10px" }}>
-              {Object.values(errors).map((error, index) => (
-                <div key={index}>{error}</div>
-              ))}
+    <div className="page-container">
+    <div className="form-container">
+      <h2 className="title">Processus de création d'événement</h2>
+      <div className="progress-bar">
+        <div className="progress" style={{ width: `${(currentStep / 2) * 100}%` }}></div>
+      </div>
+      <form onSubmit={handleSubmit}>
+        {currentStep === 1 && (
+          <div className="form-row">
+            <div className="input-item">
+              <input
+                type="text"
+                name="eventName"
+                placeholder="Titre de l’événement"
+                onChange={handleChange}
+                required
+              />
             </div>
+            <div className="input-item">
+              <textarea
+                name="eventDescription"
+                placeholder="Description détaillée"
+                rows="4"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input type="date" name="eventDate" onChange={handleChange} required />
+            </div>
+            <div className="input-item">
+              <input type="time" name="eventTime" onChange={handleChange} required />
+            </div>
+            <div className="input-item">
+              <input
+                type="text"
+                name="eventLocation"
+                placeholder="Lieu"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+        )}
+        {currentStep === 2 && (
+          <div className="form-row">
+            <div className="input-item">
+              <input
+                type="number"
+                name="capacity"
+                placeholder="Capacité"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="text"
+                name="ticketPrice"
+                placeholder="Prix des billets"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="text"
+                name="coverImage"
+                placeholder="Lien de l'image"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="text"
+                name="category"
+                placeholder="Catégorie"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="email"
+                name="organizerEmail"
+                placeholder="Email de l'organisateur"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="tel"
+                name="phoneNumber"
+                placeholder="Téléphone"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="input-item">
+              <input
+                type="text"
+                name="paymentInfo"
+                placeholder="Infos de paiement"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+        )}
+        <div className="button-container">
+          {currentStep > 1 && <button type="button" onClick={handlePrev}>Précédent</button>}
+          {currentStep < 2 ? (
+            <button type="button" onClick={handleNext}>Suivant</button>
+          ) : (
+            <button type="submit">Créer l'événement</button>
           )}
-        </form>
-      </FormContainer>
-    </PageContainer>
+        </div>
+        {Object.values(errors).length > 0 && (
+          <div className="error-messages">
+            {Object.values(errors).map((error, index) => (
+              <div key={index}>{error}</div>
+            ))}
+          </div>
+        )}
+      </form>
+    </div>
+  </div>
+  
   );
 };
 
