@@ -1,77 +1,113 @@
+/* Container principal */
 .billet-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
-  text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
+  background-color: #fff;
+  text-align: left;
+  max-width: calc(100% - 8cm); /* Limiter la largeur du conteneur */
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-left: 7cm; /* Décalage de la sidebar */
+  width: 100%; /* Prendre toute la largeur restante disponible */
 }
 
-.btn-open-modal {
+/* Section contenant tous les événements */
+.event-section-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
+  margin-top: 40px;
+  padding: 20px;
+  justify-items: center;
+  align-items: start;
+  transition: all 0.3s ease-in-out;
+  max-width: calc(100% - 5cm); /* S'assurer que la section ne dépasse pas l'espace disponible */
+}
+
+/* Tableau des billets pour chaque événement */
+.event-section {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.event-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.event-section h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Tableau des billets */
+.billet-table {
+  width: 100%;
+  max-width: 70%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+/* Styles des entêtes et cellules du tableau */
+.billet-table th, .billet-table td {
+  padding: 18px;
+  text-align: left;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.billet-table th {
   background-color: #007bff;
   color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+}
+
+.billet-table td {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.billet-table tr:nth-child(even) td {
+  background-color: #f1f1f1;
+}
+
+.billet-table tr:hover {
+  background-color: #e9ecef;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
 }
 
-.btn-open-modal:hover {
-  background-color: #0056b3;
-}
-
-.billet-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
-}
-
-.billet-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 8px; /* Augmenter l'espacement entre les billets */
-  border-radius: 5px;
-  width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre subtile */
-}
-
-.billet-item span {
-  flex-grow: 1;
-}
-
-.btn-delete {
-  background: red;
+/* Bouton dans le tableau */
+.billet-table button {
+  background: #ff4747;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 16px;
   cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-delete:hover {
-  background: darkred;
-}
-
-/* Media Queries pour la responsivité */
-@media (max-width: 600px) {
-  .billet-container {
-    padding: 10px;
-  }
-
-  .billet-list {
-    max-width: 100%; /* Liste prend toute la largeur sur mobile */
-  }
-
-  .btn-open-modal {
-    width: 100%; /* Bouton occupe toute la largeur */
-  }
+.billet-table button:hover {
+  background: #ff2222;
+  transform: scale(1.05);
 }

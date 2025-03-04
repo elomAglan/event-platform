@@ -1,9 +1,6 @@
 import React from "react";
 import { 
   faCalendarAlt, 
-  faPlus, 
-  faEdit, 
-  faTrash, 
   faUsers, 
   faCreditCard, 
   faBell 
@@ -24,9 +21,10 @@ const Gestionevent = () => {
           </h1>
         </div>
 
-        {/* Actions principales */}
+        {/* Actions principales (les 3 premiers boutons enlevés) */}
         <div className="gestionevent-actions">
-          <button className="btn-icon btn-primary">
+          {/* Boutons enlevés : Ajouter, Modifier, Supprimer */}
+          {/* <button className="btn-icon btn-primary">
             <FontAwesomeIcon icon={faPlus} />
           </button>
           <button className="btn-icon btn-secondary">
@@ -34,7 +32,7 @@ const Gestionevent = () => {
           </button>
           <button className="btn-icon btn-danger">
             <FontAwesomeIcon icon={faTrash} />
-          </button>
+          </button> */}
         </div>
 
         {/* Liste des événements */}

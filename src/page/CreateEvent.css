@@ -1,87 +1,86 @@
-/* Styles généraux */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-/* Conteneur principal */
-.main-container {
-  width: 100%;
+/* Styles spécifiques à CreateEvent */
+.create-event-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* Centre horizontalement */
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  padding: 20px;
-}
-
-/* Conteneur du formulaire */
-.event-form-container {
+  flex-direction: column; /* Permet de placer le titre au-dessus du formulaire */
+  height: 100vh; /* Centre verticalement */
   width: 100%;
-  max-width: 800px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
-  padding: 40px;
-  margin-left: auto;
-  margin-right: 10%;
+  background-color: white; /* Arrière-plan blanc */
+  padding: 0 40px; /* Augmente l'espace latéral pour éviter que les champs soient trop serrés */
 }
 
 /* Titre */
 .form-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 32px; /* Augmente la taille du texte */
   font-weight: bold;
-  color: #6c5ce7;
-  margin-bottom: 20px;
+  color: #08080b;
+  margin-bottom: 15px; /* Augmente l'espacement sous le titre */
+  margin-top: -20px; /* Monte davantage le titre */
+}
+
+/* Conteneur du formulaire */
+.event-form-container {
+  width: 100%;
+  max-width: 800px; /* Augmente la largeur maximale pour plus d'espace */
+  background: white; /* Arrière-plan du formulaire blanc */
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 0px 0 0 100px; /* Ajuste la position pour éviter que le conteneur cache le titre */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligne les éléments sur la gauche */
+  box-sizing: border-box; /* S'assure que le padding ne modifie pas la largeur */
 }
 
 /* Barre de progression */
 .progress-bar-container {
-  height: 5px;
-  background-color: #ccc;
+  height: 6px; /* Un peu plus grande pour plus de visibilité */
+  background-color: #e0e0e0;
   margin-bottom: 20px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .progress-bar {
   height: 100%;
   background-color: #6c5ce7;
   border-radius: 5px;
+  width: 0%; /* Initialement vide, à ajuster avec JS */
 }
 
-/* Disposition des champs */
+/* Groupe d'inputs */
 .input-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.input-item {
-  width: calc(50% - 10px); /* Largeur de chaque champ (50% pour deux colonnes) */
-}
-
-/* Pour les champs occupant toute la largeur */
-.input-item.full-width {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crée 2 colonnes égales */
+  gap: 20px; /* Espacement entre les champs */
   width: 100%;
 }
 
+/* Style des champs */
+.input-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Permet aux champs de s'étirer dans la direction de la colonne */
+}
+
+/* Champs de formulaire */
 .input-item input,
 .input-item textarea,
 .input-item select {
   width: 100%;
-  padding: 12px;
-  margin-top: 5px;
+  padding: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
+  outline: none;
+  max-width: 420px; /* Augmente la largeur maximale des champs */
+  min-width: 280px; /* Augmente la largeur minimale des champs */
 }
 
-/* Styles spécifiques pour textarea */
+/* Textearea spécifique */
 textarea {
   resize: none;
   min-height: 120px;
@@ -92,6 +91,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  width: 100%;
 }
 
 .button-group button {
@@ -100,8 +100,8 @@ textarea {
   border: none;
   padding: 15px;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 18px;
   font-weight: bold;
   transition: background 0.3s;
   width: 48%;
@@ -118,13 +118,27 @@ textarea {
   text-align: center;
 }
 
-/* Pour les écrans plus petits, empiler les champs */
+/* Responsive */
 @media (max-width: 768px) {
-  .input-item {
-    width: 100%; /* Champs sur toute la largeur pour les petits écrans */
+  .create-event-container {
+    padding: 0 10px; /* Réduit l'espace latéral sur mobile */
+  }
+
+  .event-form-container {
+    padding: 20px; /* Réduit l'espace de padding sur mobile */
+    margin-left: 0; /* Annule le décalage pour les petits écrans */
+  }
+
+  .input-group {
+    grid-template-columns: 1fr; /* Affiche les champs en une seule colonne sur petits écrans */
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .button-group button {
-    width: 100%; /* Boutons sur toute la largeur */
+    width: 100%;
   }
 }

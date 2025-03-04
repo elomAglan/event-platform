@@ -65,9 +65,9 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="create-event-container">
+      <h2 className="form-title">Processus de création d'événement</h2> {/* Titre hors du conteneur */}
       <div className="event-form-container">
-        <h2 className="form-title">Processus de création d'événement</h2>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${(currentStep / 2) * 100}%` }}></div>
         </div>
@@ -77,7 +77,7 @@ const CreateEvent = () => {
               <div className="input-item">
                 <input type="text" name="eventName" placeholder="Titre de l’événement" onChange={handleChange} required />
               </div>
-              <div className="input-item">
+              <div className="input-item full-width">
                 <textarea name="eventDescription" placeholder="Description détaillée" rows="4" onChange={handleChange} required />
               </div>
               <div className="input-item">
@@ -104,7 +104,7 @@ const CreateEvent = () => {
           {currentStep === 2 && (
             <div className="input-group">
               <div className="input-item">
-                <input type="number" name="capacity" placeholder="Capacité" onChange={handleChange} required />
+                <input type="number" name="capacity" placeholder="Places" onChange={handleChange} required />
               </div>
               <div className="input-item">
                 <label>
@@ -123,7 +123,7 @@ const CreateEvent = () => {
               <div className="input-item">
                 <input type="tel" name="phoneNumber" placeholder="Téléphone" onChange={handleChange} required />
               </div>
-              <div className="input-item">
+              <div className="input-item full-width">
                 <input type="text" name="paymentInfo" placeholder="Infos de paiement" onChange={handleChange} required />
               </div>
             </div>
