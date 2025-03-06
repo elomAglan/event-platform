@@ -20,7 +20,7 @@ const PATHS = {
   CREATE_EVENT: "/createvent",
   MANAGE_EVENT: "/gestionevent",
   TICKETS: "/billet",
-  SETTINGS: "/parametre",
+  SETTINGS: "/gestionroles",
   PROFILE: "/profil",
   VALIDATOR: "/validateur",
 };
@@ -40,7 +40,7 @@ const Sidebar = () => {
     { to: PATHS.CREATE_EVENT, label: "Créer un événement", icon: faPlusCircle },
     { to: PATHS.MANAGE_EVENT, label: "Gérer les événements", icon: faClipboardList },  // Nouveau changement ici
     { to: PATHS.TICKETS, label: "Mes Billets", icon: faTicketAlt },
-    { to: PATHS.SETTINGS, label: "Paramètres", icon: faCog },
+    { to: PATHS.SETTINGS, label: "GestionRoles", icon: faCog },
     { to: PATHS.PROFILE, label: "Profil", icon: faUser },
     { to: PATHS.VALIDATOR, label: "Validateur", icon: faCheckCircle },
 ];

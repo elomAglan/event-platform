@@ -45,6 +45,7 @@ const Billet = () => {
       setCurrentEvent(null);
     }
   }, []);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,17 +86,18 @@ const Billet = () => {
     );
     toggleModal();
   };
-
   const handleDelete = useCallback((eventId, ticketId) => {
-    setEvents((prev) =>
-      prev.map((event) =>
+    setEvents((prev) => {
+      const updatedEvents = prev.map((event) =>
         event.id === eventId
           ? { ...event, tickets: event.tickets.filter((ticket) => ticket.id !== ticketId) }
           : event
-      )
-    );
+      );
+      console.log(updatedEvents);  // Vérifiez l'état après suppression
+      return updatedEvents;
+    });
   }, []);
-
+  
   return (
     <div className="billet-container">
       <h1>Gestion des Billets</h1>

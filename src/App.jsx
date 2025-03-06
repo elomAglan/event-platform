@@ -11,7 +11,7 @@ import Payeticket from "./page/Payeticket";
 import Gestionevent from "./page/Gestionevent";
 import Dashboard from "./page/Dashboard";
 import Billet from "./page/Billet";
-import Parametre from "./page/Parametre";
+import GestionRoles from "./page/GestionRoles";
 import Profil from "./page/Profil";
 import Validateur from "./page/Validateur";
 
@@ -19,19 +19,22 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Pages nécessitant la Sidebar
-  const isAppPage = [
+  // Définition des pages nécessitant la Sidebar
+  const pagesWithSidebar = [
     "/createvent",
     "/gestionevent",
     "/billet",
-    "/parametre",
+    "/gestionroles",
     "/dashboard",
     "/profil",
     "/validateur"
-  ].includes(location.pathname);
+  ];
 
-  // Pages sans Navbar ni Footer
-  const isHiddenPage = ["/login", "/register", "/payeticket"].includes(location.pathname);
+  // Définition des pages sans Navbar ni Footer
+  const pagesWithoutNavbarFooter = ["/login", "/register", "/payeticket"];
+
+  const isAppPage = pagesWithSidebar.includes(location.pathname);
+  const isHiddenPage = pagesWithoutNavbarFooter.includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -46,7 +49,7 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-                <header className="hero relative">
+                <header className="home-hero relative">
                   <div className="hero-overlay">
                     <h1 className="hero-title animate-typing">
                       Bienvenue sur <span className="highlight">Eventify</span>
@@ -59,7 +62,14 @@ function App() {
                     <button className="cta-button create" onClick={() => navigate("/createvent")}>
                       Créer un événement
                     </button>
-                    <button className="cta-button join" onClick={() => document.getElementById("events-section")?.scrollIntoView({ behavior: "smooth" })}>
+                    <button className="cta-button join" onClick={() => {
+                      const section = document.getElementById("events-section");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        console.log("Élément 'events-section' non trouvé !");
+                      }
+                    }}>
                       Participer à un événement
                     </button>
                   </div>
@@ -76,7 +86,7 @@ function App() {
             <Route path="/gestionevent" element={<Gestionevent />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/billet" element={<Billet />} />
-            <Route path="/parametre" element={<Parametre />} />
+            <Route path="/gestionroles" element={<GestionRoles />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/validateur" element={<Validateur />} />
           </Routes>
@@ -89,6 +99,7 @@ function App() {
   );
 }
 
+// Envelopper l'App dans un Router
 function Root() {
   return (
     <Router>

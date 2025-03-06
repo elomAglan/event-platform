@@ -6,6 +6,7 @@ const Profil = () => {
     nom: "",
     email: "",
     role: "",
+    password: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -17,6 +18,7 @@ const Profil = () => {
       nom: "Jean Dupont",
       email: "jean.dupont@example.com",
       role: "Organisateur",
+      password: "********",  // Mot de passe masqué
     };
     setUser(userData);
     setEditedUser(userData);
@@ -44,6 +46,7 @@ const Profil = () => {
               name="nom"
               value={editedUser.nom}
               onChange={handleChange}
+              className="input-field"
             />
           ) : (
             <span>{user.nom}</span>
@@ -58,6 +61,7 @@ const Profil = () => {
               name="email"
               value={editedUser.email}
               onChange={handleChange}
+              className="input-field"
             />
           ) : (
             <span>{user.email}</span>
@@ -67,6 +71,21 @@ const Profil = () => {
         <div className="profil-field">
           <label>Rôle :</label>
           <span>{user.role}</span>
+        </div>
+
+        <div className="profil-field">
+          <label>Mot de passe :</label>
+          {isEditing ? (
+            <input
+              type="password"
+              name="password"
+              value={editedUser.password}
+              onChange={handleChange}
+              className="input-field"
+            />
+          ) : (
+            <span>********</span>  // Masquer le mot de passe en mode lecture seule
+          )}
         </div>
 
         {isEditing ? (

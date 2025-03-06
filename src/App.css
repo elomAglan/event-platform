@@ -6,8 +6,8 @@ body, html {
   font-family: 'Poppins', sans-serif;
 }
 
-/* ---- HERO SECTION ---- */
-.hero {
+/* ---- HERO SECTION SPECIFIQUE ---- */
+.home-hero {
   position: relative;
   width: 100%;
   height: 70vh;
@@ -15,8 +15,8 @@ body, html {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ---- SLIDESHOW ---- */
-.hero::before {
+/* ---- SLIDESHOW SPECIFIQUE ---- */
+.home-hero::before {
   content: "";
   position: absolute;
   top: 0;
@@ -42,7 +42,7 @@ body, html {
 }
 
 /* ---- Effet d’assombrissement ---- */
-.hero::after {
+.home-hero::after {
   content: "";
   position: absolute;
   top: 0;
@@ -52,8 +52,8 @@ body, html {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* ---- Texte de la section ---- */
-.hero-overlay {
+/* ---- Texte de la section spécifique ---- */
+.home-hero .hero-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -63,7 +63,7 @@ body, html {
   z-index: 10;
 }
 
-.hero-title {
+.home-hero .hero-title {
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
   font-weight: 700;
@@ -90,19 +90,19 @@ body, html {
   }
 }
 
-.hero-subtitle {
+.home-hero .hero-subtitle {
   font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   max-width: 600px;
   margin: auto;
 }
 
-.highlight {
+.home-hero .highlight {
   color: #007bff;
 }
 
-/* ---- BOUTONS EN HAUT À GAUCHE ---- */
-.cta-section {
+/* ---- BOUTONS EN HAUT À GAUCHE SPECIFIQUE ---- */
+.home-hero .cta-section {
   position: absolute;
   top: 350px;
   left: 20px;
@@ -111,7 +111,7 @@ body, html {
   z-index: 10;
 }
 
-.cta-button {
+.home-hero .cta-button {
   display: inline-block;
   padding: 15px 30px;
   font-family: 'Poppins', sans-serif;
@@ -124,61 +124,73 @@ body, html {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-button.create {
+.home-hero .cta-button.create {
   background-color: #007bff;
 }
 
-.cta-button.join {
+.home-hero .cta-button.join {
   background-color: #19a93a;
 }
 
-.cta-button:hover {
+.home-hero .cta-button:hover {
   transform: scale(1.1);
   box-shadow: 0px 4px 15px rgba(5, 83, 32, 0.863);
 }
 
-/* ---- RESPONSIVE DESIGN ---- */
+/* ---- RESPONSIVE DESIGN SPECIFIQUE ---- */
 @media (max-width: 768px) {
-  .hero {
-    height: 50vh; /* Réduit la hauteur de la section hero pour les tablettes et mobiles */
+  .home-hero {
+    height: 50vh;
   }
 
-  .hero-title {
-    font-size: 2.5rem; /* Ajuste la taille de la police du titre */
-    width: 80%; /* Permet au titre de s'afficher correctement sur petits écrans */
-    margin: auto; /* Centrer le titre */
+  .home-hero .hero-title {
+    font-size: 2.5rem;
+    width: 80%;
+    margin: auto;
   }
 
-  .cta-section {
-    top: 250px; /* Déplace les boutons un peu plus bas */
-    left: 10px; /* Réduit l'espace à gauche */
-    flex-direction: column; /* Empile les boutons verticalement */
-    align-items: center; /* Centre les boutons */
+  .home-hero .cta-section {
+    top: 250px;
+    left: 10px;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .cta-button {
-    padding: 12px 25px; /* Réduit la taille des boutons */
-    font-size: 0.9rem; /* Réduit la taille de la police */
+  /* Masquer le bouton "Participer à un événement" */
+  .home-hero .cta-button.join {
+    display: none; /* Masque le bouton "Participer à un événement" sur les petits écrans */
   }
 
-  .hero-subtitle {
-    font-size: 1rem; /* Réduit la taille de la police */
-    max-width: 90%; /* Permet plus de largeur pour le texte */
+  .home-hero .cta-button {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
+  .home-hero .hero-subtitle {
+    font-size: 1rem;
+    max-width: 90%;
   }
 }
 
 @media (max-width: 480px) {
-  .hero {
-    height: 40vh; /* Réduit encore la hauteur sur les petits écrans */
+  .home-hero {
+    height: 40vh;
   }
 
-  .hero-title {
-    font-size: 2rem; /* Taille plus petite du titre */
-    width: 100%; /* Permet au titre de prendre toute la largeur */
+  .home-hero .hero-title {
+    font-size: 2rem;
+    width: 100%;
   }
 
-  .cta-button {
-    padding: 10px 20px; /* Boutons plus petits */
-    font-size: 0.8rem; /* Taille plus petite pour les petits écrans */
+  /* Masquer le bouton "Participer à un événement" sur les plus petits écrans */
+  .home-hero .cta-button.join {
+    display: none; /* Masque le bouton "Participer à un événement" */
+  }
+
+  /* Pousser le bouton "Créer un événement" vers la droite */
+  .home-hero .cta-button.create {
+    margin-left: 100px; /* Décale le bouton vers la droite */
+    padding: 10px 20px;
+    font-size: 0.8rem;
   }
 }

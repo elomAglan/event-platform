@@ -15,7 +15,7 @@
   font-weight: bold;
   color: #333;
   margin-bottom: 15px;
-  text-align: center;
+  text-align: left; /* Assure que le titre est aligné à gauche */
   position: relative;
   display: inline-block;
 }
@@ -24,14 +24,15 @@
   color: #007bff;
 }
 
+/* Barre sous le titre, alignée au début du titre */
 .page1-title::after {
   content: '';
   display: block;
-  width: 60px;
-  height: 4px;
-  background-color: #007bff;
-  margin: 10px auto 0;
-  border-radius: 2px;
+  width: 60px; /* Largeur de la barre */
+  height: 4px; /* Hauteur de la barre */
+  background-color: #007bff; /* Couleur de la barre */
+  margin: 10px 0 0; /* Marge pour séparer la barre du titre */
+  border-radius: 2px; /* Bord arrondi pour la barre */
 }
 
 .page1-subtitle {
@@ -162,16 +163,42 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 320px) { /* Pour les très petits écrans (ex. iPhone SE, petits smartphones) */
   .page1-title {
-    font-size: 2rem;
+    font-size: 1.6rem; /* Réduit la taille du titre pour les écrans très petits */
+    text-align: center; /* Centre le titre */
+    margin-bottom: 8px; /* Réduit l'espace sous le titre */
   }
 
   .page1-subtitle {
-    font-size: 1rem;
+    font-size: 0.8rem; /* Réduit la taille du sous-titre */
+    text-align: center; /* Centre le sous-titre */
+    margin-bottom: 20px; /* Réduit l'espace sous le sous-titre */
   }
 
   .event-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Affiche les événements en une seule colonne */
+    gap: 12px; /* Réduit l'espacement entre les éléments */
+  }
+
+  .event-card {
+    padding: 15px; /* Réduit l'espacement à l'intérieur des cartes */
+  }
+
+  .event-card-title {
+    font-size: 1.3rem; /* Réduit la taille du titre de la carte */
+  }
+
+  .event-card-details {
+    font-size: 0.85rem; /* Réduit la taille des détails pour les petits écrans */
+  }
+
+  .event-card-ticket {
+    font-size: 0.95rem; /* Ajuste la taille du texte du billet */
+  }
+
+  .event-button {
+    padding: 10px; /* Réduit la taille du bouton */
+    font-size: 0.9rem; /* Réduit la taille de la police des boutons */
   }
 }

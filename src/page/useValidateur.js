@@ -3,38 +3,31 @@ import { useState } from "react";
 const useValidateur = () => {
   const [errors, setErrors] = useState({});
 
-  // Règles de validation
+  // Règles de validation dynamiques
   const rules = {
     ticketCode: {
       required: "Le code du ticket est requis.",
       minLength: { value: 6, message: "Le code du ticket doit contenir au moins 6 caractères." },
-      pattern: { value: /^[A-Z0-9]{6,}$/, message: "Le code du ticket est invalide." },
+      pattern: { value: /^[A-Z0-9]{6,}$/, message: "Le code du ticket est invalide (lettres majuscules et chiffres uniquement)." },
     },
-    // Autres règles peuvent être ajoutées ici...
   };
 
-  // Fonction de validation des champs
+  // Fonction de validation d'un champ spécifique
   const validate = (name, value) => {
+    if (!rules[name]) return;
+
     let errorMessage = "";
 
-    if (rules[name]) {
-      if (!value.trim()) {
-        errorMessage = rules[name].required;
-      } else {
-        for (const rule in rules[name]) {
-          if (rule !== "required") {
-            const ruleObj = rules[name][rule];
-            if (rule === "minLength" && value.length < ruleObj.value) {
-              errorMessage = ruleObj.message;
-              break;
-            } else if (rule.startsWith("contains") && !ruleObj.value.test(value)) {
-              errorMessage = ruleObj.message;
-              break;
-            } else if (rule === "pattern" && !ruleObj.value.test(value)) {
-              errorMessage = ruleObj.message;
-              break;
-            }
-          }
+    if (!value.trim()) {
+      errorMessage = rules[name].required;
+    } else {
+      for (const rule in rules[name]) {
+        if (rule === "minLength" && value.length < rules[name][rule].value) {
+          errorMessage = rules[name][rule].message;
+          break;
+        } else if (rule === "pattern" && !rules[name][rule].value.test(value)) {
+          errorMessage = rules[name][rule].message;
+          break;
         }
       }
     }
@@ -42,13 +35,21 @@ const useValidateur = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: errorMessage }));
   };
 
-  // Vérifie si le formulaire est valide
-  const isValid = () => Object.values(errors).every((error) => error === "");
+  // Vérifie si le formulaire est valide (pas d'erreurs et au moins un champ rempli)
+  const isValid = () => {
+    return Object.values(errors).every((error) => error === "") &&
+           Object.keys(errors).length > 0;
+  };
 
-  // Réinitialise les erreurs
+  // Réinitialise toutes les erreurs
   const resetErrors = () => setErrors({});
 
-  return { errors, validate, isValid, resetErrors };
+  // Supprime une erreur spécifique (ex: au focus du champ)
+  const clearError = (name) => {
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  };
+
+  return { errors, validate, isValid, resetErrors, clearError };
 };
 
 export default useValidateur;

@@ -1,74 +1,88 @@
 .profil-container {
-  max-width: 500px;
-  margin: 40px auto;
+  display: flex;
+  flex-direction: column; /* Organiser les éléments en colonne */
+  justify-content: flex-start; /* Aligner les éléments en haut */
+  align-items: center; /* Centrer horizontalement */
+  min-height: 100vh;
+  background-color: #f7f7f7;
   padding: 20px;
-  background: #fff;
+}
+
+.profil-card {
+  background-color: white;
+  padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .profil-title {
   font-size: 24px;
   color: #333;
   margin-bottom: 20px;
-}
-
-.profil-card {
-  padding: 20px;
-  border-radius: 8px;
-  background: #f9f9f9;
+  text-align: center; /* Centrer le texte horizontalement */
+  font-weight: 600;
+  width: 100%; /* S'assurer que le titre occupe toute la largeur */
 }
 
 .profil-field {
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 20px;
 }
 
 .profil-field label {
-  font-weight: bold;
-  color: #555;
-}
-
-.profil-field span, .profil-field input {
-  margin-top: 5px;
   font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
 }
 
-.profil-field input {
-  padding: 8px;
+.profil-field span {
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field {
   width: 100%;
-  max-width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border 0.3s;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 .profil-button {
-  margin-top: 20px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
 .profil-button.edit {
-  background: #007bff;
+  background-color: #f0ad4e;
   color: white;
 }
 
 .profil-button.edit:hover {
-  background: #0056b3;
+  background-color: #ec971f;
 }
 
 .profil-button.save {
-  background: #28a745;
+  background-color: #5bc0de;
   color: white;
 }
 
 .profil-button.save:hover {
-  background: #1e7e34;
+  background-color: #31b0d5;
 }
